@@ -1,0 +1,49 @@
+import { createBrowserRouter, Outlet } from 'react-router';
+import { Home } from './pages/Home';
+import { LeChef } from './pages/LeChef';
+import { Prestations } from './pages/Prestations';
+import { Tarifs } from './pages/Tarifs';
+import { Contact } from './pages/Contact';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+
+function Root() {
+  return (
+    <div className="min-h-screen flex flex-col" style={{ fontFamily: 'var(--font-body)' }}>
+      <Header />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    Component: Root,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: 'le-chef',
+        Component: LeChef,
+      },
+      {
+        path: 'prestations',
+        Component: Prestations,
+      },
+      {
+        path: 'tarifs',
+        Component: Tarifs,
+      },
+      {
+        path: 'contact',
+        Component: Contact,
+      },
+    ],
+  },
+]);
