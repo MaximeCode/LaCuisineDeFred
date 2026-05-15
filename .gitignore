@@ -172,3 +172,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# uploads
+backend/public/uploads/*
+!backend/public/uploads/.gitkeep
