@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { Award, Leaf, FileText } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import React from 'react';
 
 export function Home() {
   const prestations = [
@@ -60,7 +61,7 @@ export function Home() {
           />
           <div className="absolute inset-0 bg-black/50" />
         </div>
-        
+
         <div className="relative z-10 text-center text-white px-6 max-w-5xl">
           <h1 className="text-6xl md:text-8xl mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
             La Cuisine de Fred
@@ -149,19 +150,6 @@ export function Home() {
         </div>
       </section>
 
-      {/* Service Area */}
-      <section className="max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-5xl md:text-6xl mb-8 text-center" style={{ fontFamily: 'var(--font-heading)' }}>
-          Traiteur à Chartres et en Eure-et-Loir
-        </h2>
-        <p className="text-xl text-muted-foreground leading-relaxed text-center">
-          Basé près de Chartres, je me déplace dans tout le département de l'Eure-et-Loir (28) 
-          pour vos événements privés et professionnels. Que ce soit pour un mariage, un anniversaire, 
-          ou un repas d'entreprise, je vous propose une cuisine gastronomique préparée sur place 
-          avec des produits frais et de saison.
-        </p>
-      </section>
-
       {/* Final CTA */}
       <section className="bg-[var(--dark-grey)] text-white py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -178,6 +166,19 @@ export function Home() {
             Demander un devis gratuit
           </Link>
         </div>
+      </section>
+
+      {/* Service Area */}
+      <section className="max-w-4xl mx-auto px-6 py-24">
+        <h2 className="text-5xl md:text-6xl mb-8 text-center" style={{ fontFamily: 'var(--font-heading)' }}>
+          Traiteur à Chartres et en Eure-et-Loir
+        </h2>
+        <p className="text-xl text-muted-foreground leading-relaxed text-center">
+          Basé près de Chartres, je me déplace dans tout le département de l'Eure-et-Loir (28)
+          pour vos événements privés et professionnels. Que ce soit pour un mariage, un anniversaire,
+          ou un repas d'entreprise, je vous propose une cuisine gastronomique préparée sur place
+          avec des produits frais et de saison.
+        </p>
       </section>
     </div>
   );

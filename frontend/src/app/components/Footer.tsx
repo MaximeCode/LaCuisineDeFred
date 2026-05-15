@@ -1,8 +1,10 @@
 import { Phone, Mail, MapPin, Star } from 'lucide-react';
+import React from 'react';
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--dark-grey)] text-white mt-24">
+    <footer className="bg-[var(--dark-grey)] text-white">
+      <hr className="bg-gray-600 h-1" />
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}

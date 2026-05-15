@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import React from 'react';
 
 export function Header() {
   const location = useLocation();

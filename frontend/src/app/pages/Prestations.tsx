@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import React from 'react';
 
 export function Prestations() {
   const [activeCategory, setActiveCategory] = useState('all');

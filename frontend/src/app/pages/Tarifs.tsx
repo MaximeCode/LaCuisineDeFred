@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { Check } from 'lucide-react';
+import React from 'react';
 
 export function Tarifs() {
   const formulas = [
