@@ -1,69 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import React from 'react';
+import { getPrestations, type Prestation } from '../../api/prestations';
+import { getCategories, type Category } from '../../api/categories';
 
 export function Prestations() {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [prestations, setPrestations] = useState<Prestation[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
-  const categories = [
-    { id: 'all', label: 'Toutes les prestations' },
-    { id: 'mariages', label: 'Mariages' },
-    { id: 'evenements-prives', label: 'Événements privés' },
-    { id: 'entreprise', label: 'Repas d\'entreprise' },
-    { id: 'saisonniers', label: 'Produits saisonniers' },
-  ];
+  useEffect(() => {
+    async function loadData() {
+      try {
+        setLoadError(null);
+        const data = await getPrestations();
+        console.log(data);
+        setPrestations(data);
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+        console.log(categoriesData);
+      } catch (error) {
+        setLoadError(
+          error instanceof Error ? error.message : 'Impossible de charger les prestations.',
+        );
+      }
+    }
 
-  const prestations = [
-    {
-      category: 'mariages',
-      title: 'Banquet de mariage élégant',
-      image: 'https://images.unsplash.com/photo-1758810742443-b82f48355828?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwY2F0ZXJpbmclMjBlbGVnYW50JTIwdGFibGV8ZW58MXx8fHwxNzczNTE4ODU0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'saisonniers',
-      title: 'Saumon mariné citron vert et gingembre',
-      image: 'https://images.unsplash.com/photo-1771995356656-3a5e975318e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYWxtb24lMjBkaXNoJTIwZ291cm1ldCUyMHBsYXRlZHxlbnwxfHx8fDE3NzM1MTg4NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'saisonniers',
-      title: 'Foie gras artisanal au Banyuls',
-      image: 'https://images.unsplash.com/photo-1758972574371-57cf8c42bae8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb2llJTIwZ3JhcyUyMGdvdXJtZXQlMjBmcmVuY2h8ZW58MXx8fHwxNzczNTE4ODU2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'evenements-prives',
-      title: 'Plat raffiné pour événement privé',
-      image: 'https://images.unsplash.com/photo-1625225977832-7de9c77a6048?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBtYWluJTIwY291cnNlJTIwcGxhdGVkfGVufDF8fHx8MTc3MzUxODg1N3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'mariages',
-      title: 'Plateau de fromages affinés',
-      image: 'https://images.unsplash.com/photo-1773245149417-5b7414fec7d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVlc2UlMjBwbGF0dGVyJTIwZ291cm1ldCUyMGZyZW5jaHxlbnwxfHx8fDE3NzM1MTg4NTd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'evenements-prives',
-      title: 'Pâtisserie fine française',
-      image: 'https://images.unsplash.com/photo-1605138693981-6c8a5ea87796?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBkZXNzZXJ0JTIwcGFzdHJ5JTIwZWxlZ2FudHxlbnwxfHx8fDE3NzM1MTg4NTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'entreprise',
-      title: 'Buffet pour événement corporate',
-      image: 'https://images.unsplash.com/photo-1751651054926-36ea440bb06c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXRlcmluZyUyMGJ1ZmZldCUyMGVsZWdhbnQlMjBldmVudHxlbnwxfHx8fDE3NzM1MTg4NTh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'mariages',
-      title: 'Entrée gastronomique raffinée',
-      image: 'https://images.unsplash.com/photo-1673705988622-18d05a5cf293?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBnb3VybWV0JTIwZGlzaCUyMHBsYXRlZCUyMGVsZWdhbnR8ZW58MXx8fHwxNzczNTE4ODU0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      category: 'entreprise',
-      title: 'Table dressée pour séminaire',
-      image: 'https://images.unsplash.com/photo-1709380757207-89e864f6b3c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5lJTIwZGluaW5nJTIwdGFibGUlMjBzZXR0aW5nfGVufDF8fHx8MTc3MzQ4NTAxM3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-  ];
+    loadData();
+  }, []);
 
-  const filteredPrestations = activeCategory === 'all'
+  const filteredPrestations = activeCategory === null
     ? prestations
-    : prestations.filter((p) => p.category === activeCategory);
+    : prestations.filter((p) => p.category?.id === activeCategory);
 
   return (
     <div className="min-h-screen">
@@ -83,15 +52,22 @@ export function Prestations() {
       <section className="bg-white border-b border-border sticky top-[73px] z-40">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category) => (
+            <button
+              onClick={() => setActiveCategory(null)}
+              className={`px-6 py-2.5 rounded-full transition-all ${activeCategory === null
+                ? 'bg-[var(--burgundy)] text-white shadow-md'
+                : 'bg-muted text-foreground hover:bg-[var(--burgundy)]/10'
+                }`}
+            >
+              Toutes les prestations</button>
+            {categories.map((category: Category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2.5 rounded-full transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-[var(--burgundy)] text-white shadow-md'
-                    : 'bg-muted text-foreground hover:bg-[var(--burgundy)]/10'
-                }`}
+                className={`px-6 py-2.5 rounded-full transition-all ${activeCategory === category.id
+                  ? 'bg-[var(--burgundy)] text-white shadow-md'
+                  : 'bg-muted text-foreground hover:bg-[var(--burgundy)]/10'
+                  }`}
               >
                 {category.label}
               </button>
@@ -102,10 +78,15 @@ export function Prestations() {
 
       {/* Prestations Grid */}
       <section className="max-w-7xl mx-auto px-6 py-20">
+        {loadError && (
+          <div className="text-center py-10 mb-8">
+            <p className="text-destructive text-lg">{loadError}</p>
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPrestations.map((prestation, index) => (
             <div
-              key={index}
+              key={prestation.id || index}
               className="group cursor-pointer"
               style={{
                 animation: 'fadeIn 0.5s ease-in-out',
@@ -148,7 +129,7 @@ export function Prestations() {
             Un Projet en Tête ?
           </h2>
           <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
-            Je serais ravi de créer un menu personnalisé qui fera de votre événement 
+            Je serais ravi de créer un menu personnalisé qui fera de votre événement
             un moment inoubliable.
           </p>
           <a

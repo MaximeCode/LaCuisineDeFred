@@ -13,7 +13,6 @@
   "attributes": {
     "Label": {
       "type": "string",
-      "default": "Évènements privés",
       "maxLength": 50,
       "required": true
     }

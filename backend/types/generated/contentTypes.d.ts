@@ -485,8 +485,7 @@ export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 50;
-      }> &
-      Schema.Attribute.DefaultTo<'\u00C9v\u00E8nements priv\u00E9s'>;
+      }>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
