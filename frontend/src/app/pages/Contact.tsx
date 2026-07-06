@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Loader2 } from 'lucide-react';
 import React from 'react';
+import { PostAPI } from '../../api/Client';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -14,13 +15,17 @@ export function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setLoading(true);
+    setError(null);
+
+    try {
+      await PostAPI('/api/contact', formData);
+      setSubmitted(true);
       setFormData({
         eventType: '',
         eventDate: '',
@@ -30,7 +35,15 @@ export function Contact() {
         email: '',
         comment: '',
       });
-    }, 3000);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Impossible d\'envoyer votre demande. Vérifiez que le serveur est démarré et réessayez.',
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -62,7 +75,7 @@ export function Contact() {
               Demander un Devis
             </h2>
             <p className="text-muted-foreground mb-8 leading-relaxed text-lg">
-              Remplissez ce formulaire avec les détails de votre événement. 
+              Remplissez ce formulaire avec les détails de votre événement.
               Je vous répondrai dans les plus brefs délais.
             </p>
 
@@ -191,12 +204,11 @@ export function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={submitted}
-                className={`w-full py-4 rounded-full transition-all flex items-center justify-center gap-2 text-lg ${
-                  submitted
-                    ? 'bg-green-600 text-white'
-                    : 'bg-[var(--burgundy)] text-white hover:bg-[#6b0f2a]'
-                }`}
+                disabled={submitted || loading}
+                className={`w-full py-4 rounded-full transition-all flex items-center justify-center gap-2 text-lg ${submitted
+                  ? 'bg-green-600 text-white'
+                  : 'bg-[var(--burgundy)] text-white hover:bg-[#6b0f2a]'
+                  }`}
               >
                 {submitted ? (
                   <>
@@ -205,11 +217,21 @@ export function Contact() {
                   </>
                 ) : (
                   <>
-                    <Send size={20} />
+                    {loading ? (
+                      <Loader2 className="animate-spin" size={20} />
+                    ) : (
+                      <Send size={20} />
+                    )}
                     Envoyer ma demande
                   </>
                 )}
               </button>
+
+              {error && (
+                <p className="text-center text-red-600 text-sm">
+                  {error}
+                </p>
+              )}
 
               {submitted && (
                 <p className="text-center text-green-600 text-sm">
