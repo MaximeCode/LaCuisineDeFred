@@ -4,6 +4,7 @@ import { LeChef } from './pages/LeChef';
 import { Prestations } from './pages/Prestations';
 import { Tarifs } from './pages/Tarifs';
 import { Contact } from './pages/Contact';
+import { PrestationDetail } from './pages/(one)/prestation';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import React from 'react';
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: 'prestations',
         Component: Prestations,
+      },
+      {
+        path: 'prestation/:documentId',
+        Component: PrestationDetail,
       },
       {
         path: 'tarifs',

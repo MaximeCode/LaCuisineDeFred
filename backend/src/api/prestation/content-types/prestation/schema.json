@@ -30,6 +30,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::categorie.categorie"
+    },
+    "details": {
+      "type": "blocks"
     }
   }
 }

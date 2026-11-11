@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import React from 'react';
 import { getPrestations, type Prestation } from '../../api/prestations';
 import { getCategories, type Category } from '../../api/categories';
+import { Link } from 'react-router';
 
 export function Prestations() {
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
@@ -15,11 +15,11 @@ export function Prestations() {
       try {
         setLoadError(null);
         const data = await getPrestations();
-        console.log(data);
+        // console.log(data);
         setPrestations(data);
         const categoriesData = await getCategories();
         setCategories(categoriesData);
-        console.log(categoriesData);
+        // console.log(categoriesData);
       } catch (error) {
         setLoadError(
           error instanceof Error ? error.message : 'Impossible de charger les prestations.',
@@ -85,7 +85,7 @@ export function Prestations() {
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPrestations.map((prestation, index) => (
-            <div
+            <Link to={`/prestation/${prestation.documentId}`}
               key={prestation.id || index}
               className="group cursor-pointer"
               style={{
@@ -109,7 +109,7 @@ export function Prestations() {
                   </h3>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

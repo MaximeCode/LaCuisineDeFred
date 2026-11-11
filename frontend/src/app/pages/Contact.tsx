@@ -43,6 +43,9 @@ export function Contact() {
       );
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
     }
   };
 
@@ -205,9 +208,9 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={submitted || loading}
-                className={`w-full py-4 rounded-full transition-all flex items-center justify-center gap-2 text-lg ${submitted
-                  ? 'bg-green-600 text-white'
-                  : 'bg-[var(--burgundy)] text-white hover:bg-[#6b0f2a]'
+                className={`w-full py-4 rounded-full transition-all flex items-center justify-center gap-2 text-lg text-white ${submitted
+                  ? 'bg-green-600'
+                  : 'bg-[var(--burgundy)] hover:bg-[#6b0f2a]'
                   }`}
               >
                 {submitted ? (
@@ -234,7 +237,7 @@ export function Contact() {
               )}
 
               {submitted && (
-                <p className="text-center text-green-600 text-sm">
+                <p className="text-center text-green-600 text-md">
                   Merci pour votre demande ! Je vous répondrai très rapidement.
                 </p>
               )}

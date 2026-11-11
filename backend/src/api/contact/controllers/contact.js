@@ -1,5 +1,5 @@
 // backend/src/api/contact/controllers/contact.js
-const { buildContactEmail } = require('../templates/contact-email');
+const { buildContactEmail } = require('../templates_js/contact-email');
 
 module.exports = {
     async send(ctx) {
