@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { BlocksRenderer } from '../components/BlocksRenderer';
+import { Seo } from '../components/Seo';
 import { getLeChef, type LeChefContent } from '../../api/leChef';
 
 const EMPTY_CONTENT: LeChefContent = {
@@ -39,6 +40,11 @@ export function LeChef() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Le Chef"
+        description="Découvrez Fred, chef à domicile et traiteur à Chartres : parcours, cuisine maison et philosophie autour de produits frais en Eure-et-Loir."
+        image={content.image ?? undefined}
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
@@ -78,7 +84,7 @@ export function LeChef() {
               {hasTitle ? content.titre : 'Contenu à venir'}
             </h2>
             {hasDescription ? (
-              <BlocksRenderer content={content.description} />
+              <BlocksRenderer content={content.description} headingOffset={1} />
             ) : (
               <p className="text-xl text-muted-foreground leading-relaxed">
                 La présentation du chef sera bientôt disponible.

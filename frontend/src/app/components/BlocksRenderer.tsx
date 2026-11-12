@@ -70,21 +70,32 @@ function renderList(list: ListBlockNode, key: string): React.ReactNode {
   );
 }
 
-function renderBlock(block: BlocksRootNode, index: number): React.ReactNode {
+function renderBlock(
+  block: BlocksRootNode,
+  index: number,
+  headingOffset = 0,
+): React.ReactNode {
   const key = `block-${index}`;
 
   switch (block.type) {
     case "heading": {
       const heading = block as HeadingBlockNode;
+      const level = Math.min(6, Math.max(1, heading.level + headingOffset)) as
+        | 1
+        | 2
+        | 3
+        | 4
+        | 5
+        | 6;
       const className =
-        heading.level <= 2
+        level <= 2
           ? "mb-4 mt-10 first:mt-0 text-[var(--burgundy)]"
           : "mb-3 mt-8 text-foreground/70";
       const style =
-        heading.level <= 2 ? { fontFamily: "var(--font-heading)" } : undefined;
+        level <= 2 ? { fontFamily: "var(--font-heading)" } : undefined;
       const children = renderInline(heading.children, key);
 
-      switch (heading.level) {
+      switch (level) {
         case 1:
           return (
             <h1 key={key} className={`text-4xl md:text-5xl ${className}`} style={style}>
@@ -177,12 +188,18 @@ function renderBlock(block: BlocksRootNode, index: number): React.ReactNode {
 
 type BlocksRendererProps = {
   content: BlocksContent;
+  /** Décale les headings CMS pour éviter un second h1 sous le h1 de page. */
+  headingOffset?: number;
 };
 
-export function BlocksRenderer({ content }: BlocksRendererProps) {
+export function BlocksRenderer({ content, headingOffset = 0 }: BlocksRendererProps) {
   if (!content.length) {
     return null;
   }
 
-  return <div className="blocks-content">{content.map(renderBlock)}</div>;
+  return (
+    <div className="blocks-content">
+      {content.map((block, index) => renderBlock(block, index, headingOffset))}
+    </div>
+  );
 }

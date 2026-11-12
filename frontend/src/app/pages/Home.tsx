@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Award, Leaf, FileText } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { Seo } from '../components/Seo';
 import { getLatestPrestations, type Prestation } from '../../api/prestations';
+import { DEFAULT_DESCRIPTION, SITE_NAME, buildLocalBusinessJsonLd } from '../../utils/seo';
 
 export function Home() {
   const [prestations, setPrestations] = useState<Prestation[]>([]);
@@ -46,6 +48,12 @@ export function Home() {
 
   return (
     <div>
+      <Seo
+        title={SITE_NAME}
+        description={DEFAULT_DESCRIPTION}
+        absoluteTitle
+        jsonLd={buildLocalBusinessJsonLd()}
+      />
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">

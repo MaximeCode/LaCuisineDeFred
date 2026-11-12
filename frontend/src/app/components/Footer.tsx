@@ -10,9 +10,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+            <p className="text-2xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
               La Cuisine de Fred
-            </h3>
+            </p>
             <p className="text-gray-300 leading-relaxed">
               Chef à domicile et service traiteur pour vos événements privés et professionnels.
             </p>
@@ -20,9 +20,9 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+            <p className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
               Contact
-            </h4>
+            </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-300">
                 <Phone size={18} className="text-[var(--burgundy)]" />
@@ -41,9 +41,9 @@ export function Footer() {
 
           {/* Reviews */}
           <div>
-            <h4 className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+            <p className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
               Avis clients
-            </h4>
+            </p>
             <div className="flex items-center gap-2 mb-3">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star key={star} size={18} fill="var(--burgundy)" className="text-[var(--burgundy)]" />

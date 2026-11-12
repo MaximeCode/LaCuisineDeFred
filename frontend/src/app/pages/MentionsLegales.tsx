@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { Seo } from '../components/Seo';
 
 function LegalSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -17,6 +18,10 @@ function LegalSection({ title, children }: { title: string; children: React.Reac
 export function MentionsLegales() {
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Mentions légales"
+        description="Mentions légales de La Cuisine de Fred, traiteur à Chartres : éditeur, hébergeur, propriété intellectuelle et responsabilités du site."
+      />
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
           <h1 className="text-6xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>

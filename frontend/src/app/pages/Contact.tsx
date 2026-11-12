@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Phone, Mail, MapPin, Send, Loader2 } from 'lucide-react';
 import React from 'react';
 import { PostAPI } from '../../api/Client';
+import { Seo } from '../components/Seo';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -58,6 +59,10 @@ export function Contact() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Contact"
+        description="Contactez La Cuisine de Fred, traiteur et chef à domicile à Chartres : demandez un devis pour votre mariage, anniversaire ou repas d'entreprise en Eure-et-Loir."
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { getOnePrestation, type Prestation } from "../../../api/prestations";
 import { BlocksRenderer } from "../../components/BlocksRenderer";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
+import { Seo } from "../../components/Seo";
 import React from "react";
 
 const pageBackgroundStyle: React.CSSProperties = {
@@ -86,8 +87,15 @@ export function PrestationDetail() {
     );
   }
 
+  const seoDescription = `Découvrez « ${prestation.title} » par La Cuisine de Fred, traiteur et chef à domicile à Chartres (Eure-et-Loir).`;
+
   return (
     <PrestationPageShell>
+      <Seo
+        title={prestation.title}
+        description={seoDescription.slice(0, 160)}
+        image={prestation.image}
+      />
       {/* Hero Section */}
       <section className="relative h-[35vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-12 pt-8">
@@ -124,7 +132,7 @@ export function PrestationDetail() {
 
         <div className="rounded-2xl bg-white/90 backdrop-blur-sm px-6 py-10 md:px-10 md:py-12 shadow-sm ring-1 ring-[var(--burgundy)]/10">
           {prestation.details && prestation.details.length > 0 ? (
-            <BlocksRenderer content={prestation.details} />
+            <BlocksRenderer content={prestation.details} headingOffset={1} />
           ) : (
             <p className="text-muted-foreground text-lg text-center py-12">
               Le détail de cette prestation sera bientôt disponible.

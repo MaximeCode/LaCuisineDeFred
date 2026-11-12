@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { Seo } from '../components/Seo';
 
 function LegalSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -17,6 +18,10 @@ function LegalSection({ title, children }: { title: string; children: React.Reac
 export function PolitiqueConfidentialite() {
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Politique de confidentialité"
+        description="Politique de confidentialité de La Cuisine de Fred à Chartres : données personnelles, formulaire de devis, cookies, droits RGPD et conservation."
+      />
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
           <h1 className="text-6xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>

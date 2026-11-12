@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { Seo } from '../components/Seo';
 import { getPrestations, type Prestation } from '../../api/prestations';
 import { getCategories, type Category } from '../../api/categories';
 import { Link } from 'react-router';
@@ -46,6 +47,10 @@ export function Prestations() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Prestations"
+        description="Portfolio des prestations de La Cuisine de Fred, traiteur à Chartres : créations culinaires pour mariages, anniversaires et repas d'entreprise en Eure-et-Loir."
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">

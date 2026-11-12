@@ -1,0 +1,5 @@
+# La Cuisine de Fred — crawlabilité du site vitrine
+User-agent: *
+Allow: /
+
+Sitemap: https://lacuisinedefred-traiteur.fr/sitemap.xml

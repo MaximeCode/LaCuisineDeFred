@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Check } from 'lucide-react';
+import { Seo } from '../components/Seo';
 import {
   formatFormulePrice,
   getFormules,
@@ -54,6 +55,10 @@ export function Tarifs() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Tarifs"
+        description="Formules traiteur et produits saisonniers de La Cuisine de Fred à Chartres : tarifs par personne, sur devis, pour mariages et événements en Eure-et-Loir."
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--burgundy)] to-[var(--dark-grey)]">
         <div className="relative z-10 text-center text-white px-6">

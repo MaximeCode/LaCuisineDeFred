@@ -1,30 +1,14 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router';
-
-const ROBOTS_META_ATTR = 'data-lcdf-404-robots';
+import { Seo } from '../components/Seo';
 
 export function NotFound() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = 'Page introuvable — La Cuisine de Fred';
-
-    let robots = document.querySelector(`meta[name="robots"][${ROBOTS_META_ATTR}]`);
-    if (!robots) {
-      robots = document.createElement('meta');
-      robots.setAttribute('name', 'robots');
-      robots.setAttribute(ROBOTS_META_ATTR, 'true');
-      document.head.appendChild(robots);
-    }
-    robots.setAttribute('content', 'noindex, nofollow');
-
-    return () => {
-      document.title = previousTitle;
-      robots?.remove();
-    };
-  }, []);
-
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-6 py-24">
+      <Seo
+        title="Page introuvable"
+        description="La page demandée est introuvable sur le site de La Cuisine de Fred, traiteur à Chartres."
+        noindex
+      />
       <div className="max-w-2xl text-center">
         <p
           className="text-8xl md:text-9xl text-[var(--burgundy)] mb-4"
