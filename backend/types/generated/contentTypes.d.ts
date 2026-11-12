@@ -534,6 +534,38 @@ export interface ApiPrestationPrestation extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFormuleFormule extends Struct.CollectionTypeSchema {
+  collectionName: 'formules';
+  info: {
+    displayName: 'Formules';
+    pluralName: 'formules';
+    singularName: 'formule';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    details: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::formule.formule'
+    > &
+      Schema.Attribute.Private;
+    populaire: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    prix: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProduitProduit extends Struct.CollectionTypeSchema {
   collectionName: 'produits';
   info: {
@@ -1087,6 +1119,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::categorie.categorie': ApiCategorieCategorie;
+      'api::formule.formule': ApiFormuleFormule;
       'api::prestation.prestation': ApiPrestationPrestation;
       'api::produit.produit': ApiProduitProduit;
       'plugin::content-releases.release': PluginContentReleasesRelease;
