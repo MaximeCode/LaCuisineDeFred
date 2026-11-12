@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "le_chefs",
+  "info": {
+    "singularName": "le-chef",
+    "pluralName": "le-chefs",
+    "displayName": "Le Chef"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "philosophies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "le-chef.philosophie"
+    }
+  }
+}

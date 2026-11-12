@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_le_chef_philosophies",
+  "info": {
+    "displayName": "Philosophie",
+    "description": "Point de philosophie du chef",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -534,6 +534,37 @@ export interface ApiPrestationPrestation extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiLeChefLeChef extends Struct.SingleTypeSchema {
+  collectionName: 'le_chefs';
+  info: {
+    displayName: 'Le Chef';
+    pluralName: 'le-chefs';
+    singularName: 'le-chef';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::le-chef.le-chef'
+    > &
+      Schema.Attribute.Private;
+    philosophies: Schema.Attribute.Component<'le-chef.philosophie', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    titre: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFormuleFormule extends Struct.CollectionTypeSchema {
   collectionName: 'formules';
   info: {
@@ -1120,6 +1151,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::categorie.categorie': ApiCategorieCategorie;
       'api::formule.formule': ApiFormuleFormule;
+      'api::le-chef.le-chef': ApiLeChefLeChef;
       'api::prestation.prestation': ApiPrestationPrestation;
       'api::produit.produit': ApiProduitProduit;
       'plugin::content-releases.release': PluginContentReleasesRelease;
