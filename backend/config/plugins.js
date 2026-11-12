@@ -10,8 +10,8 @@ module.exports = ({ env }) => ({
         secure: false,
       },
       settings: {
-        defaultFrom: 'no-reply@lacuisinedefred.fr',
-        defaultReplyTo: 'no-reply@lacuisinedefred.fr',
+        defaultFrom: env('SMTP_FROM', 'no-reply@lacuisinedefred.fr'),
+        defaultReplyTo: env('SMTP_FROM', 'no-reply@lacuisinedefred.fr'),
       },
     },
   },

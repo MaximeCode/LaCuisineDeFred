@@ -37,8 +37,8 @@ module.exports = ({ env }) => ({
         ignoreTLS: env.bool('SMTP_IGNORE_TLS', true),
       },
       settings: {
-        defaultFrom: env('SMTP_FROM', 'no-reply@lacuisinedefred.fr'),
-        defaultReplyTo: env('SMTP_REPLY_TO', 'no-reply@lacuisinedefred.fr'),
+        defaultFrom: env('SMTP_FROM', 'no-reply@example.test'),
+        defaultReplyTo: env('SMTP_FROM', 'no-reply@example.test'),
       },
     },
   },
@@ -47,6 +47,17 @@ module.exports = ({ env }) => ({
 
 For local development, this configuration works well with MailHog or Mailpit on port `1025`.
 
+Required env vars (see `backend/.env.example`):
+
+```env
+SMTP_HOST=localhost
+SMTP_PORT=1025
+SMTP_FROM=no-reply@example.test
+CONTACT_TO=inbox@example.test
+```
+
+`CONTACT_TO` is the recipient of contact-form emails (no hardcoded business address in the controller).
+
 For production, set the SMTP values in `backend/.env`:
 
 ```env
@@ -54,8 +65,8 @@ SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_IGNORE_TLS=false
-SMTP_FROM=no-reply@lacuisinedefred.fr
-SMTP_REPLY_TO=contact@lacuisinedefred.fr
+SMTP_FROM=no-reply@example.com
+CONTACT_TO=inbox@example.com
 ```
 
 If your SMTP provider requires authentication, add it to `providerOptions`:
@@ -124,10 +135,18 @@ module.exports = {
 
     const fullName = `${firstName} ${lastName}`.trim();
 
+    const contactTo = process.env.CONTACT_TO;
+    const smtpFrom = process.env.SMTP_FROM || 'no-reply@example.test';
+
+    if (!contactTo) {
+      strapi.log.error('[contact] CONTACT_TO is not configured');
+      return ctx.internalServerError('Configuration email manquante');
+    }
+
     try {
       await strapi.plugins.email.services.email.send({
-        to: 'contact@lacuisinedefred.fr',
-        from: 'no-reply@lacuisinedefred.fr',
+        to: contactTo,
+        from: smtpFrom,
         replyTo: email,
         subject: `Nouvelle demande de devis - ${fullName}`,
         text: `
@@ -234,9 +253,12 @@ Restart Strapi after installing the provider or changing `config/plugins.js`:
 npm run develop
 ```
 
-## 9. Test The Endpoint
+## 9. Test With MailHog
 
-With Strapi running, test the API directly:
+1. Start MailHog (SMTP `localhost:1025`, UI `http://localhost:8025/`).
+2. Ensure `backend/.env` has `CONTACT_TO`, `SMTP_HOST=localhost`, `SMTP_PORT=1025`.
+3. Start Strapi (`npm run develop` in `backend/`).
+4. Send a test request:
 
 ```bash
 curl -X POST http://localhost:1337/api/contact \
@@ -259,6 +281,8 @@ Expected response:
   "message": "Email envoyé avec succès"
 }
 ```
+
+5. Open `http://localhost:8025/` and confirm the message appears in the inbox.
 
 ## Troubleshooting
 

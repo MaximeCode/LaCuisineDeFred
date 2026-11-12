@@ -14,10 +14,18 @@ module.exports = {
             comment,
         });
 
+        const contactTo = process.env.CONTACT_TO;
+        const smtpFrom = process.env.SMTP_FROM || 'no-reply@lacuisinedefred.fr';
+
+        if (!contactTo) {
+            strapi.log.error('[contact] CONTACT_TO is not configured');
+            return ctx.internalServerError('Configuration email manquante');
+        }
+
         try {
             await strapi.plugins['email'].services.email.send({
-                to: 'contact@lacuisinedefred.fr',
-                from: 'no-reply@lacuisinedefred.fr',
+                to: contactTo,
+                from: smtpFrom,
                 replyTo: email,
                 subject: `Nouvelle demande de devis — ${fullName}`,
                 text,
