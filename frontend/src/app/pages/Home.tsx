@@ -1,35 +1,30 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Award, Leaf, FileText } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import React from 'react';
+import { getLatestPrestations, type Prestation } from '../../api/prestations';
 
 export function Home() {
-  const prestations = [
-    {
-      title: 'Saumon mariné citron vert et gingembre',
-      image: 'https://images.unsplash.com/photo-1771995356656-3a5e975318e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYWxtb24lMjBkaXNoJTIwZ291cm1ldCUyMHBsYXRlZHxlbnwxfHx8fDE3NzM1MTg4NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Foie gras au Banyuls',
-      image: 'https://images.unsplash.com/photo-1758972574371-57cf8c42bae8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb2llJTIwZ3JhcyUyMGdvdXJtZXQlMjBmcmVuY2h8ZW58MXx8fHwxNzczNTE4ODU2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Plat principal raffiné',
-      image: 'https://images.unsplash.com/photo-1625225977832-7de9c77a6048?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBtYWluJTIwY291cnNlJTIwcGxhdGVkfGVufDF8fHx8MTc3MzUxODg1N3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Plateau de fromages affinés',
-      image: 'https://images.unsplash.com/photo-1773245149417-5b7414fec7d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVlc2UlMjBwbGF0dGVyJTIwZ291cm1ldCUyMGZyZW5jaHxlbnwxfHx8fDE3NzM1MTg4NTd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Pâtisserie française',
-      image: 'https://images.unsplash.com/photo-1605138693981-6c8a5ea87796?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBkZXNzZXJ0JTIwcGFzdHJ5JTIwZWxlZ2FudHxlbnwxfHx8fDE3NzM1MTg4NTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Entrée gastronomique',
-      image: 'https://images.unsplash.com/photo-1673705988622-18d05a5cf293?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBnb3VybWV0JTIwZGlzaCUyMHBsYXRlZCUyMGVsZWdhbnR8ZW58MXx8fHwxNzczNTE4ODU0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-  ];
+  const [prestations, setPrestations] = useState<Prestation[]>([]);
+  const [prestationsError, setPrestationsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadLatestPrestations() {
+      try {
+        setPrestationsError(null);
+        const data = await getLatestPrestations(3);
+        setPrestations(data);
+      } catch (error) {
+        setPrestationsError(
+          error instanceof Error
+            ? error.message
+            : 'Impossible de charger les dernières prestations.',
+        );
+      }
+    }
+
+    loadLatestPrestations();
+  }, []);
 
   const values = [
     {
@@ -89,10 +84,25 @@ export function Home() {
           </p>
         </div>
 
+        {prestationsError && (
+          <div className="text-center py-10 mb-8">
+            <p className="text-destructive text-lg">{prestationsError}</p>
+          </div>
+        )}
+
+        {!prestationsError && prestations.length === 0 && (
+          <div className="text-center py-10 mb-8">
+            <p className="text-muted-foreground text-lg">
+              Aucune prestation publiée pour le moment.
+            </p>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {prestations.map((prestation, index) => (
-            <div
-              key={index}
+            <Link
+              to={`/prestation/${prestation.documentId}`}
+              key={prestation.documentId}
               className="group cursor-pointer"
               style={{
                 transform: index % 2 === 1 ? 'translateY(1.5rem)' : 'translateY(0)',
@@ -112,7 +122,7 @@ export function Home() {
                   </h3>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

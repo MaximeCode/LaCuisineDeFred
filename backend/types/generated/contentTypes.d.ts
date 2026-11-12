@@ -511,7 +511,7 @@ export interface ApiPrestationPrestation extends Struct.CollectionTypeSchema {
   };
   attributes: {
     categorie: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::categorie.categorie'
     >;
     createdAt: Schema.Attribute.DateTime;

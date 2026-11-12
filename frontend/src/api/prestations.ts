@@ -11,28 +11,38 @@ export type Prestation = {
   category?: Category;
 };
 
+type PrestationApiItem = {
+  id: number;
+  documentId: string;
+  Titre: string;
+  image?: { url: string };
+  details?: BlocksContent | null;
+  categorie?: { id: number; Label: string };
+};
+
+function mapPrestation(item: PrestationApiItem): Prestation {
+  return {
+    id: item.id,
+    documentId: item.documentId,
+    title: item.Titre,
+    image: `${API_URL}${item.image?.url ?? ""}`,
+    details: item.details,
+    category: item.categorie
+      ? { id: item.categorie.id, label: item.categorie.Label }
+      : undefined,
+  };
+}
+
 export async function getPrestations(): Promise<Prestation[]> {
   const { data } = await fetchAPI("/api/prestations?populate=*");
+  return data.map(mapPrestation);
+}
 
-  return data.map(
-    (item: {
-      id: number;
-      documentId: string;
-      Titre: string;
-      image?: { url: string };
-      details?: BlocksContent | null;
-      categorie?: { id: number; Label: string };
-    }) => ({
-      id: item.id,
-      documentId: item.documentId,
-      title: item.Titre,
-      image: `${API_URL}${item.image?.url ?? ""}`,
-      details: item.details,
-      category: item.categorie
-        ? { id: item.categorie.id, label: item.categorie.Label }
-        : undefined,
-    }),
+export async function getLatestPrestations(limit = 3): Promise<Prestation[]> {
+  const { data } = await fetchAPI(
+    `/api/prestations?populate=*&sort=publishedAt:desc&pagination[limit]=${limit}`,
   );
+  return data.map(mapPrestation);
 }
 
 export async function getOnePrestation(

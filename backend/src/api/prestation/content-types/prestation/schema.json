@@ -28,7 +28,7 @@
     },
     "categorie": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::categorie.categorie"
     },
     "details": {

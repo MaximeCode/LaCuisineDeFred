@@ -30,9 +30,19 @@ export function Prestations() {
     loadData();
   }, []);
 
+  const sortedPrestations = [...prestations].sort((a, b) => {
+    const categoryCompare = (a.category?.label ?? '').localeCompare(
+      b.category?.label ?? '',
+      'fr',
+      { sensitivity: 'base' },
+    );
+    if (categoryCompare !== 0) return categoryCompare;
+    return a.title.localeCompare(b.title, 'fr', { sensitivity: 'base' });
+  });
+
   const filteredPrestations = activeCategory === null
-    ? prestations
-    : prestations.filter((p) => p.category?.id === activeCategory);
+    ? sortedPrestations
+    : sortedPrestations.filter((p) => p.category?.id === activeCategory);
 
   return (
     <div className="min-h-screen">

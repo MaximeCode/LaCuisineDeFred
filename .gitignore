@@ -176,3 +176,13 @@ next-env.d.ts
 # uploads
 backend/public/uploads/*
 !backend/public/uploads/.gitkeep
+
+# Exemples
+frontend/Exemple page légales/*
+frontend/Exemple SEO/*
+
+# CDC
+CDC.md
+
+# Docs locales pour sous-agents (ne pas committer)
+docs/agent-tasks/
