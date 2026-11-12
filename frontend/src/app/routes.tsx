@@ -6,6 +6,7 @@ import { Tarifs } from './pages/Tarifs';
 import { Contact } from './pages/Contact';
 import { MentionsLegales } from './pages/MentionsLegales';
 import { PolitiqueConfidentialite } from './pages/PolitiqueConfidentialite';
+import { NotFound } from './pages/NotFound';
 import { PrestationDetail } from './pages/(one)/prestation';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: 'politique-de-confidentialite',
         Component: PolitiqueConfidentialite,
+      },
+      {
+        path: '*',
+        Component: NotFound,
       },
     ],
   },
