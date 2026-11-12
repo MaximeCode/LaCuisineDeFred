@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { Phone, Mail, MapPin, Star } from 'lucide-react';
 import React from 'react';
 
@@ -64,12 +65,12 @@ export function Footer() {
         <div className="border-t border-gray-600 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <p>© 2026 La Cuisine de Fred. Tous droits réservés.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/mentions-legales" className="hover:text-white transition-colors">
               Mentions légales
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link to="/politique-de-confidentialite" className="hover:text-white transition-colors">
               Politique de confidentialité
-            </a>
+            </Link>
           </div>
         </div>
       </div>

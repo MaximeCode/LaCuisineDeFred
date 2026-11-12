@@ -4,6 +4,8 @@ import { LeChef } from './pages/LeChef';
 import { Prestations } from './pages/Prestations';
 import { Tarifs } from './pages/Tarifs';
 import { Contact } from './pages/Contact';
+import { MentionsLegales } from './pages/MentionsLegales';
+import { PolitiqueConfidentialite } from './pages/PolitiqueConfidentialite';
 import { PrestationDetail } from './pages/(one)/prestation';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -49,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         Component: Contact,
+      },
+      {
+        path: 'mentions-legales',
+        Component: MentionsLegales,
+      },
+      {
+        path: 'politique-de-confidentialite',
+        Component: PolitiqueConfidentialite,
       },
     ],
   },
