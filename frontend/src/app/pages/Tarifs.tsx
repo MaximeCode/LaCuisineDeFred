@@ -1,8 +1,35 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Check } from 'lucide-react';
-import React from 'react';
+import {
+  formatProduitPrice,
+  getProduits,
+  groupProduitsByCategory,
+  type ProduitsByCategory,
+} from '../../api/produits';
 
 export function Tarifs() {
+  const [seasonalProducts, setSeasonalProducts] = useState<ProduitsByCategory[]>([]);
+  const [produitsError, setProduitsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadProduits() {
+      try {
+        setProduitsError(null);
+        const produits = await getProduits();
+        setSeasonalProducts(groupProduitsByCategory(produits));
+      } catch (error) {
+        setProduitsError(
+          error instanceof Error
+            ? error.message
+            : 'Impossible de charger les produits saisonniers.',
+        );
+      }
+    }
+
+    loadProduits();
+  }, []);
+
   const formulas = [
     {
       name: 'Formule Basique',
@@ -51,25 +78,6 @@ export function Tarifs() {
         'Prestations additionnelles',
       ],
       highlighted: false,
-    },
-  ];
-
-  const seasonalProducts = [
-    {
-      category: 'Foie Gras Artisanal',
-      items: [
-        { name: 'Foie gras nature', price: '85€/kg' },
-        { name: 'Foie gras au Banyuls', price: '90€/kg' },
-        { name: 'Foie gras à l\'abricot', price: '90€/kg' },
-      ],
-    },
-    {
-      category: 'Spécialités Maison',
-      items: [
-        { name: 'Saumon mariné citron vert et gingembre', price: '12€/pers' },
-        { name: 'Terrine de campagne', price: '8€/pers' },
-        { name: 'Verrines gourmandes (lot de 6)', price: '18€' },
-      ],
     },
   ];
 
@@ -188,21 +196,35 @@ export function Tarifs() {
             </p>
           </div>
 
+          {produitsError && (
+            <div className="text-center py-10 mb-8">
+              <p className="text-destructive text-lg">{produitsError}</p>
+            </div>
+          )}
+
+          {!produitsError && seasonalProducts.length === 0 && (
+            <div className="text-center py-10 mb-8">
+              <p className="text-muted-foreground text-lg">
+                Aucun produit saisonnier publié pour le moment.
+              </p>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {seasonalProducts.map((product, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-md">
+            {seasonalProducts.map((group) => (
+              <div key={group.category} className="bg-white rounded-2xl p-8 shadow-md">
                 <h3 className="text-3xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {product.category}
+                  {group.category}
                 </h3>
                 <ul className="space-y-4">
-                  {product.items.map((item, itemIndex) => (
+                  {group.items.map((item) => (
                     <li
-                      key={itemIndex}
+                      key={item.documentId}
                       className="flex justify-between items-center pb-4 border-b border-border last:border-0"
                     >
-                      <span className="text-foreground text-lg">{item.name}</span>
+                      <span className="text-foreground text-lg">{item.title}</span>
                       <span className="text-[var(--burgundy)] text-xl" style={{ fontFamily: 'var(--font-heading)' }}>
-                        {item.price}
+                        {formatProduitPrice(item.price, item.unite)}
                       </span>
                     </li>
                   ))}
