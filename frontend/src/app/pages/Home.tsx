@@ -3,10 +3,12 @@ import { Link } from 'react-router';
 import { Award, Leaf, FileText } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { Seo } from '../components/Seo';
+import { useDonneesLegales } from '../context/DonneesLegalesContext';
 import { getLatestPrestations, type Prestation } from '../../api/prestations';
 import { DEFAULT_DESCRIPTION, SITE_NAME, buildLocalBusinessJsonLd } from '../../utils/seo';
 
 export function Home() {
+  const legales = useDonneesLegales();
   const [prestations, setPrestations] = useState<Prestation[]>([]);
   const [prestationsError, setPrestationsError] = useState<string | null>(null);
 
@@ -52,7 +54,13 @@ export function Home() {
         title={SITE_NAME}
         description={DEFAULT_DESCRIPTION}
         absoluteTitle
-        jsonLd={buildLocalBusinessJsonLd()}
+        jsonLd={buildLocalBusinessJsonLd({
+          streetAddress: legales.professionnelles.rue,
+          postalCode: legales.professionnelles.codePostal,
+          addressLocality: legales.professionnelles.ville || 'Chartres',
+          telephone: legales.personnelles.telephone,
+          email: legales.personnelles.email,
+        })}
       />
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">

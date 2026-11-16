@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "donnees_legales",
+  "info": {
+    "singularName": "donnees-legale",
+    "pluralName": "donnees-legales",
+    "displayName": "Données légales",
+    "description": "Identité et coordonnées affichées sur le site (mentions, contact, SEO)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "personnelles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "donnees-legales.personnelles",
+      "required": true
+    },
+    "professionnelles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "donnees-legales.professionnelles",
+      "required": true
+    }
+  }
+}

@@ -23,7 +23,21 @@ export function absoluteUrl(path = '/'): string {
   return `${SITE_URL}${normalized}`;
 }
 
-export function buildLocalBusinessJsonLd() {
+type LocalBusinessContact = {
+  streetAddress?: string;
+  postalCode?: string;
+  addressLocality?: string;
+  telephone?: string;
+  email?: string;
+};
+
+export function buildLocalBusinessJsonLd(contact: LocalBusinessContact = {}) {
+  const streetAddress = contact.streetAddress?.trim() || undefined;
+  const postalCode = contact.postalCode?.trim() || undefined;
+  const addressLocality = contact.addressLocality?.trim() || 'Chartres';
+  const telephone = contact.telephone?.trim() || undefined;
+  const email = contact.email?.trim() || undefined;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FoodEstablishment',
@@ -36,10 +50,10 @@ export function buildLocalBusinessJsonLd() {
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Chartres',
+      addressLocality,
       addressRegion: 'Eure-et-Loir',
-      postalCode: '[À COMPLÉTER]',
-      streetAddress: '[À COMPLÉTER]',
+      ...(postalCode ? { postalCode } : {}),
+      ...(streetAddress ? { streetAddress } : {}),
       addressCountry: 'FR',
     },
     areaServed: [
@@ -52,7 +66,7 @@ export function buildLocalBusinessJsonLd() {
         name: 'Eure-et-Loir',
       },
     ],
-    telephone: '[À COMPLÉTER]',
-    email: '[À COMPLÉTER]',
+    ...(telephone ? { telephone } : {}),
+    ...(email ? { email } : {}),
   };
 }

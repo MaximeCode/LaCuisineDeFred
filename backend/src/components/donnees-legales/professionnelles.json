@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_donnees_legales_professionnelles",
+  "info": {
+    "displayName": "Professionnelles",
+    "description": "Informations légales et siège de l'activité",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "denomination": {
+      "type": "string",
+      "required": true
+    },
+    "formeJuridique": {
+      "type": "string",
+      "required": true
+    },
+    "rue": {
+      "type": "string",
+      "required": true
+    },
+    "codePostal": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10
+    },
+    "ville": {
+      "type": "string",
+      "required": true
+    },
+    "siret": {
+      "type": "string",
+      "required": true
+    },
+    "siren": {
+      "type": "string"
+    },
+    "codeApe": {
+      "type": "string"
+    },
+    "tva": {
+      "type": "string"
+    },
+    "qualiteDirecteur": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

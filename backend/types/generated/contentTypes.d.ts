@@ -499,6 +499,44 @@ export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDonneesLegaleDonneesLegale extends Struct.SingleTypeSchema {
+  collectionName: 'donnees_legales';
+  info: {
+    description: 'Identit\u00E9 et coordonn\u00E9es affich\u00E9es sur le site (mentions, contact, SEO)';
+    displayName: 'Donn\u00E9es l\u00E9gales';
+    pluralName: 'donnees-legales';
+    singularName: 'donnees-legale';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::donnees-legale.donnees-legale'
+    > &
+      Schema.Attribute.Private;
+    personnelles: Schema.Attribute.Component<
+      'donnees-legales.personnelles',
+      false
+    > &
+      Schema.Attribute.Required;
+    professionnelles: Schema.Attribute.Component<
+      'donnees-legales.professionnelles',
+      false
+    > &
+      Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFormuleFormule extends Struct.CollectionTypeSchema {
   collectionName: 'formules';
   info: {
@@ -1150,6 +1188,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::categorie.categorie': ApiCategorieCategorie;
+      'api::donnees-legale.donnees-legale': ApiDonneesLegaleDonneesLegale;
       'api::formule.formule': ApiFormuleFormule;
       'api::le-chef.le-chef': ApiLeChefLeChef;
       'api::prestation.prestation': ApiPrestationPrestation;

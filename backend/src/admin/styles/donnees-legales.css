@@ -1,0 +1,38 @@
+/**
+ * Regroupement visuel des sections Personnelles / Professionnelles
+ * sur le Single Type « Données légales » (Content Manager).
+ */
+
+/* Encadrer chaque composant non répétable (sections) */
+form [data-strapi-field-name="personnelles"],
+form [data-strapi-field-name="professionnelles"],
+form div:has(> [data-strapi-field-name="personnelles"]),
+form div:has(> [data-strapi-field-name="professionnelles"]) {
+  margin-bottom: 1.75rem;
+}
+
+/* Conteneurs de composants Strapi 5 — bordure gauche burgundy */
+main form [class*="ComponentInitializer"],
+main form [class*="NonRepeatableComponent"],
+main form [class*="component-input"],
+main form [data-testid*="component"] {
+  border-radius: 8px;
+  border: 1px solid #dcdce4;
+  border-left: 4px solid #722f37;
+  background: #fafafa;
+  padding: 0.75rem 1rem 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(33, 33, 52, 0.06);
+}
+
+/* Titres de section (labels composant) */
+main form [class*="ComponentInitializer"] > label,
+main form [class*="NonRepeatableComponent"] > label,
+main form [data-testid*="component"] > label {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #722f37 !important;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  margin-bottom: 0.75rem !important;
+}

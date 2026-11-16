@@ -1,5 +1,11 @@
 import { Link } from 'react-router';
 import { Seo } from '../components/Seo';
+import { useDonneesLegales } from '../context/DonneesLegalesContext';
+import {
+  directeurPublication,
+  formatAdresseComplete,
+  formatUpdatedAtFr,
+} from '../../api/donneesLegales';
 
 function LegalSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -15,7 +21,17 @@ function LegalSection({ title, children }: { title: string; children: React.Reac
   );
 }
 
+function Value({ value, fallback = '—' }: { value: string; fallback?: string }) {
+  return <>{value.trim() ? value : fallback}</>;
+}
+
 export function MentionsLegales() {
+  const legales = useDonneesLegales();
+  const { personnelles, professionnelles, updatedAt } = legales;
+  const directeur = directeurPublication(legales);
+  const adresse = formatAdresseComplete(legales);
+  const updatedLabel = formatUpdatedAtFr(updatedAt);
+
   return (
     <div className="min-h-screen">
       <Seo
@@ -35,38 +51,41 @@ export function MentionsLegales() {
 
       <section className="max-w-3xl mx-auto px-6 py-20">
         <p className="text-muted-foreground text-sm mb-10">
-          Dernière mise à jour : [À COMPLÉTER — date]
+          Dernière mise à jour : <Value value={updatedLabel} fallback="—" />
         </p>
 
         <LegalSection title="1. Éditeur du site">
           <p>Le présent site internet est édité par&nbsp;:</p>
           <ul className="list-none space-y-1 border-l-2 border-[var(--burgundy)] pl-4 my-4">
             <li>
-              <strong>Dénomination :</strong> [À COMPLÉTER — nom commercial / raison sociale]
+              <strong>Dénomination :</strong>{' '}
+              <Value value={professionnelles.denomination} />
             </li>
             <li>
-              <strong>Forme juridique :</strong> [À COMPLÉTER — ex. entrepreneur individuel / SARL / …]
+              <strong>Forme juridique :</strong>{' '}
+              <Value value={professionnelles.formeJuridique} />
             </li>
             <li>
-              <strong>Siège / adresse :</strong> [À COMPLÉTER — adresse postale]
+              <strong>Siège / adresse :</strong> <Value value={adresse} />
             </li>
             <li>
-              <strong>SIRET :</strong> [À COMPLÉTER]
+              <strong>SIRET :</strong> <Value value={professionnelles.siret} />
             </li>
             <li>
-              <strong>SIREN :</strong> [À COMPLÉTER]
+              <strong>SIREN :</strong> <Value value={professionnelles.siren} />
             </li>
             <li>
-              <strong>Code APE / NAF :</strong> [À COMPLÉTER]
+              <strong>Code APE / NAF :</strong> <Value value={professionnelles.codeApe} />
             </li>
             <li>
-              <strong>N° TVA intracommunautaire :</strong> [À COMPLÉTER — ou « non assujetti »]
+              <strong>N° TVA intracommunautaire :</strong>{' '}
+              <Value value={professionnelles.tva} />
             </li>
             <li>
-              <strong>Téléphone :</strong> [À COMPLÉTER]
+              <strong>Téléphone :</strong> <Value value={personnelles.telephone} />
             </li>
             <li>
-              <strong>Email :</strong> [À COMPLÉTER — email de contact légal]
+              <strong>Email :</strong> <Value value={personnelles.email} />
             </li>
           </ul>
           <p>
@@ -78,8 +97,12 @@ export function MentionsLegales() {
 
         <LegalSection title="2. Directeur de la publication">
           <p>
-            Le directeur de la publication est <strong>[À COMPLÉTER — nom]</strong>, en qualité de{' '}
-            <strong>[À COMPLÉTER — qualité / statut]</strong>.
+            Le directeur de la publication est <strong><Value value={directeur} /></strong>, en
+            qualité de{' '}
+            <strong>
+              <Value value={professionnelles.qualiteDirecteur} />
+            </strong>
+            .
           </p>
         </LegalSection>
 
@@ -87,19 +110,19 @@ export function MentionsLegales() {
           <p>Le site est hébergé par&nbsp;:</p>
           <ul className="list-none space-y-1 border-l-2 border-[var(--burgundy)] pl-4 my-4">
             <li>
-              <strong>Raison sociale :</strong> [À COMPLÉTER — hébergeur]
+              <strong>Raison sociale :</strong> OVH SAS
             </li>
             <li>
-              <strong>Siège social :</strong> [À COMPLÉTER — adresse hébergeur]
+              <strong>Siège social :</strong> 2, rue Kellermann, 59100 Roubaix, France
             </li>
             <li>
-              <strong>RCS / identification :</strong> [À COMPLÉTER]
+              <strong>RCS / identification :</strong> 424 761 419 00045
             </li>
             <li>
-              <strong>Téléphone :</strong> [À COMPLÉTER]
+              <strong>Téléphone :</strong> +33 9 72 10 00 09
             </li>
             <li>
-              <strong>Site :</strong> [À COMPLÉTER — URL hébergeur]
+              <strong>Site :</strong> https://www.ovh.com
             </li>
           </ul>
         </LegalSection>
@@ -108,8 +131,9 @@ export function MentionsLegales() {
           <p>
             L&apos;ensemble des contenus présents sur ce site (textes, photographies, logos,
             éléments graphiques, structure, charte visuelle), sauf mention contraire, est la
-            propriété de [À COMPLÉTER — éditeur] ou fait l&apos;objet d&apos;une autorisation
-            d&apos;utilisation.
+            propriété de{' '}
+            <Value value={professionnelles.denomination} fallback="l'éditeur" /> ou fait
+            l&apos;objet d&apos;une autorisation d&apos;utilisation.
           </p>
           <p>
             Toute reproduction, représentation, modification, publication ou adaptation de tout ou

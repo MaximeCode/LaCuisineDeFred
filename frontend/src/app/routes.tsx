@@ -10,17 +10,20 @@ import { NotFound } from './pages/NotFound';
 import { PrestationDetail } from './pages/(one)/prestation';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { DonneesLegalesProvider } from './context/DonneesLegalesContext';
 import React from 'react';
 
 function Root() {
   return (
-    <div className="min-h-screen flex flex-col" style={{ fontFamily: 'var(--font-body)' }}>
-      <Header />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <DonneesLegalesProvider>
+      <div className="min-h-screen flex flex-col" style={{ fontFamily: 'var(--font-body)' }}>
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </DonneesLegalesProvider>
   );
 }
 

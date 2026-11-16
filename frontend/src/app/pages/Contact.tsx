@@ -2,9 +2,14 @@ import { useState } from 'react';
 import { Phone, Mail, MapPin, Send, Loader2 } from 'lucide-react';
 import React from 'react';
 import { PostAPI } from '../../api/Client';
+import { telHref } from '../../api/donneesLegales';
 import { Seo } from '../components/Seo';
+import { useDonneesLegales } from '../context/DonneesLegalesContext';
 
 export function Contact() {
+  const legales = useDonneesLegales();
+  const { telephone, email } = legales.personnelles;
+
   const [formData, setFormData] = useState({
     eventType: '',
     eventDate: '',
@@ -257,35 +262,39 @@ export function Contact() {
               </h3>
 
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[var(--burgundy)]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="text-[var(--burgundy)]" size={20} />
+                {telephone && (
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-[var(--burgundy)]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="text-[var(--burgundy)]" size={20} />
+                    </div>
+                    <div>
+                      <div className="font-medium mb-1 text-lg">Téléphone</div>
+                      <a
+                        href={telHref(telephone)}
+                        className="text-muted-foreground hover:text-[var(--burgundy)] transition-colors text-lg"
+                      >
+                        {telephone}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-medium mb-1 text-lg">Téléphone</div>
-                    <a
-                      href="tel:0612345678"
-                      className="text-muted-foreground hover:text-[var(--burgundy)] transition-colors text-lg"
-                    >
-                      06 12 34 56 78
-                    </a>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[var(--burgundy)]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="text-[var(--burgundy)]" size={20} />
+                {email && (
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-[var(--burgundy)]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Mail className="text-[var(--burgundy)]" size={20} />
+                    </div>
+                    <div>
+                      <div className="font-medium mb-1 text-lg">Email</div>
+                      <a
+                        href={`mailto:${email}`}
+                        className="text-muted-foreground hover:text-[var(--burgundy)] transition-colors text-lg"
+                      >
+                        {email}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-medium mb-1 text-lg">Email</div>
-                    <a
-                      href="mailto:contact@lacuisinedefred.fr"
-                      className="text-muted-foreground hover:text-[var(--burgundy)] transition-colors text-lg"
-                    >
-                      contact@lacuisinedefred.fr
-                    </a>
-                  </div>
-                </div>
+                )}
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-[var(--burgundy)]/10 rounded-full flex items-center justify-center flex-shrink-0">

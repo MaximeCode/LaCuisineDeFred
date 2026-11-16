@@ -1,5 +1,10 @@
 import { Link } from 'react-router';
 import { Seo } from '../components/Seo';
+import { useDonneesLegales } from '../context/DonneesLegalesContext';
+import {
+  formatAdresseComplete,
+  formatUpdatedAtFr,
+} from '../../api/donneesLegales';
 
 function LegalSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -15,7 +20,17 @@ function LegalSection({ title, children }: { title: string; children: React.Reac
   );
 }
 
+function Value({ value, fallback = '—' }: { value: string; fallback?: string }) {
+  return <>{value.trim() ? value : fallback}</>;
+}
+
 export function PolitiqueConfidentialite() {
+  const legales = useDonneesLegales();
+  const { personnelles, professionnelles, updatedAt } = legales;
+  const adresse = formatAdresseComplete(legales);
+  const updatedLabel = formatUpdatedAtFr(updatedAt);
+  const email = personnelles.email;
+
   return (
     <div className="min-h-screen">
       <Seo
@@ -35,7 +50,7 @@ export function PolitiqueConfidentialite() {
 
       <section className="max-w-3xl mx-auto px-6 py-20">
         <p className="text-muted-foreground text-sm mb-10">
-          Dernière mise à jour : [À COMPLÉTER — date]
+          Dernière mise à jour : <Value value={updatedLabel} fallback="—" />
         </p>
 
         <LegalSection title="1. Responsable du traitement">
@@ -45,12 +60,23 @@ export function PolitiqueConfidentialite() {
           </p>
           <ul className="list-none space-y-1 border-l-2 border-[var(--burgundy)] pl-4 my-4">
             <li>
-              <strong>[À COMPLÉTER — dénomination]</strong>, [À COMPLÉTER — forme juridique]
+              <strong>
+                <Value value={professionnelles.denomination} />
+              </strong>
+              , <Value value={professionnelles.formeJuridique} />
             </li>
-            <li>[À COMPLÉTER — adresse]</li>
-            <li>SIRET : [À COMPLÉTER]</li>
-            <li>Email : [À COMPLÉTER — email RGPD / contact]</li>
-            <li>Téléphone : [À COMPLÉTER]</li>
+            <li>
+              <Value value={adresse} />
+            </li>
+            <li>
+              SIRET : <Value value={professionnelles.siret} />
+            </li>
+            <li>
+              Email : <Value value={email} />
+            </li>
+            <li>
+              Téléphone : <Value value={personnelles.telephone} />
+            </li>
           </ul>
           <p>
             Pour toute question relative à vos données personnelles ou pour exercer vos droits,
@@ -99,13 +125,14 @@ export function PolitiqueConfidentialite() {
 
         <LegalSection title="4. Destinataires et sous-traitants">
           <p>
-            Les données sont destinées aux personnes habilitées de [À COMPLÉTER — éditeur], dans
-            la limite de leurs missions (réponse aux demandes, gestion du site).
+            Les données sont destinées aux personnes habilitées de{' '}
+            <Value value={professionnelles.denomination} fallback="l'éditeur" />, dans la limite
+            de leurs missions (réponse aux demandes, gestion du site).
           </p>
           <p>Elles peuvent être traitées pour notre compte par les prestataires suivants&nbsp;:</p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              <strong>[À COMPLÉTER — hébergeur]</strong> — hébergement du site et de
+              <strong>OVH SAS</strong> — hébergement du site et de
               l&apos;infrastructure technique.
             </li>
             <li>
@@ -113,7 +140,7 @@ export function PolitiqueConfidentialite() {
               administrer les contenus du site.
             </li>
             <li>
-              <strong>[À COMPLÉTER — prestataire email / SMTP]</strong> — envoi des messages issus
+              <strong>Nodemailer</strong> — envoi des messages issus
               du formulaire de contact.
             </li>
           </ul>
@@ -128,8 +155,7 @@ export function PolitiqueConfidentialite() {
           <ul className="list-disc pl-5 space-y-2">
             <li>
               <strong>Messages du formulaire de contact :</strong> conservés le temps nécessaire
-              au traitement de la demande, puis archivés au maximum [À COMPLÉTER — durée, ex. 3
-              ans] à compter du dernier contact, sauf obligation légale contraire.
+              au traitement de la demande, puis archivés au maximum 3 ans à compter du dernier contact, sauf obligation légale contraire.
             </li>
             <li>
               <strong>Logs techniques :</strong> selon les durées pratiquées par l&apos;hébergeur,
@@ -161,7 +187,10 @@ export function PolitiqueConfidentialite() {
           </ul>
           <p>
             Pour demander le retrait d&apos;une image vous concernant, contactez-nous à{' '}
-            <strong>[À COMPLÉTER — email]</strong>.
+            <strong>
+              <Value value={email} />
+            </strong>
+            .
           </p>
         </LegalSection>
 
@@ -169,8 +198,7 @@ export function PolitiqueConfidentialite() {
           <p>
             À la date de mise à jour de la présente politique, le site n&apos;utilise pas de
             cookies publicitaires ni d&apos;outils d&apos;analyse d&apos;audience déposant des
-            traceurs non essentiels — [À COMPLÉTER si des cookies analytics / marketing sont
-            ajoutés plus tard].
+            traceurs non essentiels.
           </p>
           <p>
             Seuls des éléments techniques strictement nécessaires au fonctionnement du site
@@ -199,9 +227,11 @@ export function PolitiqueConfidentialite() {
           </ul>
           <p>
             Pour exercer ces droits, adressez votre demande à{' '}
-            <strong>[À COMPLÉTER — email RGPD]</strong> en précisant l&apos;objet de votre demande
-            et en joignant un justificatif d&apos;identité si nécessaire. Nous nous engageons à y
-            répondre dans un délai d&apos;un mois.
+            <strong>
+              <Value value={email} />
+            </strong>{' '}
+            en précisant l&apos;objet de votre demande et en joignant un justificatif d&apos;identité
+            si nécessaire. Nous nous engageons à y répondre dans un délai d&apos;un mois.
           </p>
           <p>
             Vous disposez également du droit d&apos;introduire une réclamation auprès de la{' '}

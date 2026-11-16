@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_donnees_legales_personnelles",
+  "info": {
+    "displayName": "Personnelles",
+    "description": "Identité et coordonnées de contact du dirigeant",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "prenom": {
+      "type": "string",
+      "required": true
+    },
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "telephone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    }
+  }
+}

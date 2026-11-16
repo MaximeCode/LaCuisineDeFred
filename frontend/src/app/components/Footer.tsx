@@ -1,8 +1,14 @@
 import { Link } from 'react-router';
 import { Phone, Mail, MapPin, Star } from 'lucide-react';
 import React from 'react';
+import { useDonneesLegales } from '../context/DonneesLegalesContext';
+import { formatAdresseComplete, telHref } from '../../api/donneesLegales';
 
 export function Footer() {
+  const legales = useDonneesLegales();
+  const { telephone, email } = legales.personnelles;
+  const adresse = formatAdresseComplete(legales);
+
   return (
     <footer className="bg-[var(--dark-grey)] text-white">
       <hr className="bg-gray-600 h-1" />
@@ -24,17 +30,31 @@ export function Footer() {
               Contact
             </p>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 text-gray-300">
-                <Phone size={18} className="text-[var(--burgundy)]" />
-                <span>06 12 34 56 78</span>
-              </div>
+              {telephone && (
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Phone size={18} className="text-[var(--burgundy)]" />
+                  <a href={telHref(telephone)} className="hover:text-white transition-colors">
+                    {telephone}
+                  </a>
+                </div>
+              )}
               <div className="flex items-center gap-3 text-gray-300">
                 <Mail size={18} className="text-[var(--burgundy)]" />
-                <span>contact@lacuisinedefred.fr</span>
+                {email ? (
+                  <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                    {email}
+                  </a>
+                ) : (
+                  <a href="mailto:contact@lacuisinedefred.fr" className="hover:text-white transition-colors">
+                    contact@lacuisinedefred.fr
+                  </a>
+                )}
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <MapPin size={18} className="text-[var(--burgundy)]" />
-                <span>Chartres et Eure-et-Loir (28)</span>
+                <span>
+                  {adresse || 'Chartres et Eure-et-Loir (28)'}
+                </span>
               </div>
             </div>
           </div>
