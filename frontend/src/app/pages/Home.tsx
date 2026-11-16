@@ -187,16 +187,27 @@ export function Home() {
       </section>
 
       {/* Service Area */}
-      <section className="max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-5xl md:text-6xl mb-8 text-center" style={{ fontFamily: 'var(--font-heading)' }}>
-          Traiteur à Chartres et en Eure-et-Loir
-        </h2>
-        <p className="text-xl text-muted-foreground leading-relaxed text-center">
-          Basé près de Chartres, je me déplace dans tout le département de l'Eure-et-Loir (28)
-          pour vos événements privés et professionnels. Que ce soit pour un mariage, un anniversaire,
-          ou un repas d'entreprise, je vous propose une cuisine gastronomique préparée sur place
-          avec des produits frais et de saison.
-        </p>
+      <section className="max-w-6xl mx-auto px-6 py-24">
+        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
+          <div>
+            <h2 className="text-5xl md:text-6xl mb-16 text-center" style={{ fontFamily: 'var(--font-heading)' }}>
+              Traiteur à Chartres et en Eure-et-Loir
+            </h2>
+            <p className="text-xl text-muted-foreground leading-relaxed text-center md:text-left md:flex-1">
+              Basé près de Chartres, je me déplace dans tout le département de l'Eure-et-Loir (28)
+              pour vos événements privés et professionnels. Que ce soit pour un mariage, un anniversaire,
+              ou un repas d'entreprise, je vous propose une cuisine gastronomique préparée sur place
+              avec des produits frais et de saison.
+            </p>
+          </div>
+          <div className="flex justify-center md:flex-shrink-0 md:w-[min(100%,280px)] lg:w-[320px]">
+            <img
+              src="/map_eure-et-loir_3-4.jpg"
+              alt="Carte du département d'Eure-et-Loir — zone d'intervention autour de Chartres"
+              className="w-full h-auto max-w-[320px] md:max-w-none border-2 border-gray-300 rounded-lg"
+            />
+          </div>
+        </div>
       </section>
     </div>
   );

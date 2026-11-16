@@ -499,35 +499,32 @@ export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPrestationPrestation extends Struct.CollectionTypeSchema {
-  collectionName: 'prestations';
+export interface ApiFormuleFormule extends Struct.CollectionTypeSchema {
+  collectionName: 'formules';
   info: {
-    displayName: 'Prestations';
-    pluralName: 'prestations';
-    singularName: 'prestation';
+    displayName: 'Formules';
+    pluralName: 'formules';
+    singularName: 'formule';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    categorie: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::categorie.categorie'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
     details: Schema.Attribute.Blocks;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::prestation.prestation'
+      'api::formule.formule'
     > &
       Schema.Attribute.Private;
+    populaire: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    prix: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
-    Titre: Schema.Attribute.String & Schema.Attribute.Required;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -565,32 +562,35 @@ export interface ApiLeChefLeChef extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiFormuleFormule extends Struct.CollectionTypeSchema {
-  collectionName: 'formules';
+export interface ApiPrestationPrestation extends Struct.CollectionTypeSchema {
+  collectionName: 'prestations';
   info: {
-    displayName: 'Formules';
-    pluralName: 'formules';
-    singularName: 'formule';
+    displayName: 'Prestations';
+    pluralName: 'prestations';
+    singularName: 'prestation';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    categorie: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::categorie.categorie'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
     details: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::formule.formule'
+      'api::prestation.prestation'
     > &
       Schema.Attribute.Private;
-    populaire: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    prix: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
-    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    Titre: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
