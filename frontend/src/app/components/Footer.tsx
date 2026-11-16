@@ -45,8 +45,8 @@ export function Footer() {
                     {email}
                   </a>
                 ) : (
-                  <a href="mailto:contact@lacuisinedefred.fr" className="hover:text-white transition-colors">
-                    contact@lacuisinedefred.fr
+                  <a href="mailto:contact@lacuisinedefred-traiteur.fr" className="hover:text-white transition-colors">
+                    contact@lacuisinedefred-traiteur.fr
                   </a>
                 )}
               </div>

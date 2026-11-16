@@ -9,3 +9,8 @@
 
   Run `npm run dev` to start the development server.
   
+
+  ## Deployment
+
+  URL : https://lacuisinedefred-traiteur.fr
+  URL preprod : https://preprod-lacuisinedefred.fr

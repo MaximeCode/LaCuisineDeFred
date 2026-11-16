@@ -188,5 +188,5 @@ CDC.md
 docs/agent-tasks/
 
 # Scripts de deployment
-PP_DEPLOY_CLTO.bat
-PROD_DEPLOY_CLTO.bat
+PP_DEPLOY_LCDF.bat
+PROD_DEPLOY_LCDF.bat

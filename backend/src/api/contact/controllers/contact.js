@@ -15,7 +15,7 @@ module.exports = {
         });
 
         const contactTo = process.env.CONTACT_TO;
-        const smtpFrom = process.env.SMTP_FROM || 'no-reply@lacuisinedefred.fr';
+        const smtpFrom = process.env.SMTP_FROM || 'no-reply@lacuisinedefred-traiteur.fr';
 
         if (!contactTo) {
             strapi.log.error('[contact] CONTACT_TO is not configured');
