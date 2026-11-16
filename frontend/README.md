@@ -13,4 +13,4 @@
   ## Deployment
 
   URL : https://lacuisinedefred-traiteur.fr
-  URL preprod : https://preprod-lacuisinedefred.duckdns.org/
+  URL preprod : https://preprod-lacuisinedefred.duckdns.org
