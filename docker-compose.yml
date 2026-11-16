@@ -8,7 +8,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        VITE_STRAPI_URL: https://admin.preprod-lacuisinedefred.fr
+        VITE_STRAPI_URL: https://admin.preprod-lacuisinedefred.duckdns.org/
 
     restart: unless-stopped
 
@@ -16,7 +16,7 @@ services:
       - "traefik.enable=true"
 
       # Domaine frontend
-      - "traefik.http.routers.lacuisinedefred-frontend.rule=Host(`preprod-lacuisinedefred.fr`)"
+      - "traefik.http.routers.lacuisinedefred-frontend.rule=Host(`preprod-lacuisinedefred.duckdns.org/`)"
       - "traefik.http.routers.lacuisinedefred-frontend.entrypoints=websecure"
 
       # HTTPS
@@ -53,7 +53,7 @@ services:
       - "traefik.enable=true"
 
       # Domaine API Strapi
-      - "traefik.http.routers.lacuisinedefred-strapi.rule=Host(`admin.preprod-lacuisinedefred.fr`)"
+      - "traefik.http.routers.lacuisinedefred-strapi.rule=Host(`admin.preprod-lacuisinedefred.duckdns.org/`)"
       - "traefik.http.routers.lacuisinedefred-strapi.entrypoints=websecure"
 
       # HTTPS
@@ -68,7 +68,7 @@ services:
 
       # Cache long /uploads/ uniquement (pas l’API JSON)
       - "traefik.http.middlewares.lcdf-strapi-uploads-cache.headers.customresponseheaders.Cache-Control=public, max-age=31536000, immutable"
-      - "traefik.http.routers.lacuisinedefred-strapi-uploads.rule=Host(`admin.preprod-lacuisinedefred.fr`) && PathPrefix(`/uploads`)"
+      - "traefik.http.routers.lacuisinedefred-strapi-uploads.rule=Host(`admin.preprod-lacuisinedefred.duckdns.org/`) && PathPrefix(`/uploads`)"
       - "traefik.http.routers.lacuisinedefred-strapi-uploads.entrypoints=websecure"
       - "traefik.http.routers.lacuisinedefred-strapi-uploads.tls=true"
       - "traefik.http.routers.lacuisinedefred-strapi-uploads.tls.certresolver=letsencrypt"
