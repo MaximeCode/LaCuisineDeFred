@@ -186,3 +186,7 @@ CDC.md
 
 # Docs locales pour sous-agents (ne pas committer)
 docs/agent-tasks/
+
+# Scripts de deployment
+PP_DEPLOY_CLTO.bat
+PROD_DEPLOY_CLTO.bat

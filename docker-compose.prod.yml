@@ -1,0 +1,82 @@
+name: "lacuisinedefred-prod"
+
+services:
+  ## FRONTEND REACT ##
+  frontend:
+    container_name: lacuisinedefred-frontend-prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_STRAPI_URL: https://admin.lacuisinedefred.fr
+
+    restart: unless-stopped
+
+    labels:
+      - "traefik.enable=true"
+
+      # Domaine frontend
+      - "traefik.http.routers.lacuisinedefred-frontend-prod.rule=Host(`lacuisinedefred.fr`) || Host(`www.lacuisinedefred.fr`)"
+      - "traefik.http.routers.lacuisinedefred-frontend-prod.entrypoints=websecure"
+
+      # HTTPS
+      - "traefik.http.routers.lacuisinedefred-frontend-prod.tls=true"
+      - "traefik.http.routers.lacuisinedefred-frontend-prod.tls.certresolver=letsencrypt"
+
+      # Port nginx interne
+      - "traefik.http.services.lacuisinedefred-frontend-prod.loadbalancer.server.port=80"
+
+      # Cache /assets/ et /fonts/ : géré par nginx (TTL 1 an, immutable)
+
+    networks:
+      - max_network
+
+  ## STRAPI ##
+  backend:
+    container_name: lacuisinedefred-strapi-prod
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    env_file:
+      - ./backend/.env
+
+    labels:
+      - "traefik.enable=true"
+
+      # Domaine API Strapi
+      - "traefik.http.routers.lacuisinedefred-strapi-prod.rule=Host(`admin.lacuisinedefred.fr`)"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod.entrypoints=websecure"
+
+      # HTTPS
+      - "traefik.http.routers.lacuisinedefred-strapi-prod.tls=true"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod.tls.certresolver=letsencrypt"
+
+      # Port Strapi interne
+      - "traefik.http.services.lacuisinedefred-strapi-prod.loadbalancer.server.port=1337"
+
+      # Cache long /uploads/ uniquement (pas l’API JSON)
+      - "traefik.http.middlewares.lcdf-strapi-uploads-cache.headers.customresponseheaders.Cache-Control=public, max-age=31536000, immutable"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.rule=Host(`admin.lacuisinedefred.fr`) && PathPrefix(`/uploads`)"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.entrypoints=websecure"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.tls=true"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.priority=100"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.middlewares=lcdf-strapi-uploads-cache"
+      - "traefik.http.routers.lacuisinedefred-strapi-prod-uploads.service=lacuisinedefred-strapi-prod"
+
+    networks:
+      - max_network
+
+    volumes:
+      - strapi_uploads-prod:/backend/public
+
+networks:
+  max_network:
+    external: true
+
+volumes:
+  strapi_uploads-prod:
