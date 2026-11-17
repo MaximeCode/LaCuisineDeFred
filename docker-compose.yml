@@ -34,7 +34,7 @@ services:
     networks:
       - max_network
     # ports:
-      # - "5173:80"
+    # - "5173:80"
 
   ## STRAPI ##
   backend:
@@ -79,10 +79,10 @@ services:
     networks:
       - max_network
     # ports:
-      # - "1337:1337"
+    # - "1337:1337"
 
     volumes:
-      - strapi_uploads:/backend/public/uploads
+      - strapi_uploads:/backend/public
 
 networks:
   max_network:

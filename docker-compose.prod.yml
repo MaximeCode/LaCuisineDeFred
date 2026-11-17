@@ -72,7 +72,7 @@ services:
       - max_network
 
     volumes:
-      - strapi_uploads-prod:/backend/public
+      - strapi_uploads-prod:/backend
 
 networks:
   max_network:
