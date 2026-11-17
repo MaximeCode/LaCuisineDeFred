@@ -15,10 +15,10 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "^5.9.0",
-    "@strapi/plugin-users-permissions": "^5.42.1",
-    "@strapi/provider-email-nodemailer": "^5.50.0",
-    "@strapi/strapi": "^5.42.1",
+    "@strapi/plugin-cloud": "5.42.1",
+    "@strapi/plugin-users-permissions": "5.42.1",
+    "@strapi/provider-email-nodemailer": "5.42.1",
+    "@strapi/strapi": "5.42.1",
     "esbuild-register": "^3.6.0",
     "mysql2": "^3.20.0",
     "react": "^18.0.0",
@@ -34,5 +34,9 @@
   "strapi": {
     "uuid": "69e8f109-81fe-4df4-a35e-2b919521a48e",
     "installId": "fbfb5eb95f8293a5c9852c7f50140aa24af3d53e489612e1e2ea204267ee4deb"
+  },
+  "devDependencies": {
+    "@strapi/upgrade": "5.42.1",
+    "esbuild": "^0.28.2"
   }
 }
