@@ -26,7 +26,7 @@ export function formatFormulePrice(prix: number | null): {
 }
 
 function inlineText(
-  nodes: { type: string; text?: string; children?: { type: string; text?: string }[] }[],
+  nodes: { type: string; text?: string; children?: { type: string; text?: string }[] }[]
 ): string {
   return nodes
     .map((node) => {
@@ -88,9 +88,7 @@ type FormuleApiItem = {
 function mapFormule(item: FormuleApiItem): Formule {
   const rawPrice = item.prix;
   const prix =
-    rawPrice === null || rawPrice === undefined || rawPrice === ""
-      ? null
-      : Number(rawPrice);
+    rawPrice === null || rawPrice === undefined || rawPrice === "" ? null : Number(rawPrice);
   const details = item.details ?? [];
 
   return {
@@ -122,6 +120,6 @@ export function sortFormules(formules: Formule[]): Formule[] {
 }
 
 export async function getFormules(): Promise<Formule[]> {
-  const { data } = await fetchAPI("/api/formules?populate=*");
+  const { data } = await fetchAPI("/api/formules?populate=*&sort=prix:asc");
   return sortFormules(data.map(mapFormule));
 }

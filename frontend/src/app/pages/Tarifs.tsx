@@ -81,11 +81,10 @@ export function Tarifs() {
             return (
               <div
                 key={formule.documentId}
-                className={`rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
-                  highlighted
-                    ? 'bg-[var(--burgundy)] text-white shadow-xl scale-105 md:scale-105'
-                    : 'bg-white shadow-md hover:shadow-lg'
-                }`}
+                className={`rounded-2xl overflow-hidden border-2 border-transparent transition-colors duration-300 ${highlighted
+                  ? 'bg-[var(--burgundy)] text-white shadow-xl scale-105 md:scale-105 hover:border-white/40'
+                  : 'bg-white shadow-md hover:border-[var(--burgundy)] hover:shadow-lg'
+                  }`}
               >
                 <div className={`p-8 ${highlighted ? 'pb-6' : ''}`}>
                   {highlighted && (
@@ -111,7 +110,7 @@ export function Tarifs() {
                       className={`text-4xl mb-1 ${highlighted ? 'text-white' : 'text-[var(--burgundy)]'}`}
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
-                      {priceLabel}
+                      À partir de {priceLabel}
                     </div>
                     <div className={`text-sm ${highlighted ? 'text-white/80' : 'text-muted-foreground'}`}>
                       {priceDetail}
@@ -123,9 +122,8 @@ export function Tarifs() {
                       <li key={`${formule.documentId}-${itemIndex}`} className="flex items-start gap-3">
                         <Check
                           size={20}
-                          className={`flex-shrink-0 mt-0.5 ${
-                            highlighted ? 'text-white' : 'text-[var(--burgundy)]'
-                          }`}
+                          className={`flex-shrink-0 mt-0.5 ${highlighted ? 'text-white' : 'text-[var(--burgundy)]'
+                            }`}
                         />
                         <span className={`text-sm ${highlighted ? 'text-white' : 'text-foreground'}`}>
                           {item}
@@ -136,11 +134,10 @@ export function Tarifs() {
 
                   <Link
                     to="/contact"
-                    className={`block w-full text-center py-3 rounded-full transition-colors ${
-                      highlighted
-                        ? 'bg-white text-[var(--burgundy)] hover:bg-gray-100'
-                        : 'bg-[var(--burgundy)] text-white hover:bg-[#6b0f2a]'
-                    }`}
+                    className={`block w-full text-center py-3 rounded-full transition-colors ${highlighted
+                      ? 'bg-white text-[var(--burgundy)] hover:bg-gray-100'
+                      : 'bg-[var(--burgundy)] text-white hover:bg-[#6b0f2a]'
+                      }`}
                   >
                     Demander un devis
                   </Link>
