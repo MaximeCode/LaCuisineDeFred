@@ -1,11 +1,11 @@
-import type { Schema, Struct } from '@strapi/strapi';
+import type { Schema, Struct } from "@strapi/strapi";
 
 export interface DonneesLegalesPersonnelles extends Struct.ComponentSchema {
-  collectionName: 'components_donnees_legales_personnelles';
+  collectionName: "components_donnees_legales_personnelles";
   info: {
-    description: 'Identit\u00E9 et coordonn\u00E9es de contact du dirigeant';
-    displayName: 'Personnelles';
-    icon: 'user';
+    description: "Identit\u00E9 et coordonn\u00E9es de contact du dirigeant";
+    displayName: "Personnelles";
+    icon: "user";
   };
   attributes: {
     email: Schema.Attribute.Email & Schema.Attribute.Required;
@@ -16,11 +16,11 @@ export interface DonneesLegalesPersonnelles extends Struct.ComponentSchema {
 }
 
 export interface DonneesLegalesProfessionnelles extends Struct.ComponentSchema {
-  collectionName: 'components_donnees_legales_professionnelles';
+  collectionName: "components_donnees_legales_professionnelles";
   info: {
     description: "Informations l\u00E9gales et si\u00E8ge de l'activit\u00E9";
-    displayName: 'Professionnelles';
-    icon: 'briefcase';
+    displayName: "Professionnelles";
+    icon: "briefcase";
   };
   attributes: {
     codeApe: Schema.Attribute.String;
@@ -41,11 +41,11 @@ export interface DonneesLegalesProfessionnelles extends Struct.ComponentSchema {
 }
 
 export interface LeChefPhilosophie extends Struct.ComponentSchema {
-  collectionName: 'components_le_chef_philosophies';
+  collectionName: "components_le_chef_philosophies";
   info: {
-    description: 'Point de philosophie du chef';
-    displayName: 'Philosophie';
-    icon: 'bulletList';
+    description: "Point de philosophie du chef";
+    displayName: "Philosophie";
+    icon: "bulletList";
   };
   attributes: {
     description: Schema.Attribute.Text;
@@ -53,12 +53,12 @@ export interface LeChefPhilosophie extends Struct.ComponentSchema {
   };
 }
 
-declare module '@strapi/strapi' {
-  export module Public {
+declare module "@strapi/strapi" {
+  export namespace Public {
     export interface ComponentSchemas {
-      'donnees-legales.personnelles': DonneesLegalesPersonnelles;
-      'donnees-legales.professionnelles': DonneesLegalesProfessionnelles;
-      'le-chef.philosophie': LeChefPhilosophie;
+      "donnees-legales.personnelles": DonneesLegalesPersonnelles;
+      "donnees-legales.professionnelles": DonneesLegalesProfessionnelles;
+      "le-chef.philosophie": LeChefPhilosophie;
     }
   }
 }
