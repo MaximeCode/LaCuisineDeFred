@@ -663,6 +663,10 @@ export interface ApiProduitProduit extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     Prix: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
+    saison: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
     Titre: Schema.Attribute.String & Schema.Attribute.Required;
     unite: Schema.Attribute.String &
       Schema.Attribute.Required &

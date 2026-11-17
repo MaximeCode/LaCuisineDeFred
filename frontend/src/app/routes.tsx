@@ -8,6 +8,7 @@ import { MentionsLegales } from './pages/MentionsLegales';
 import { PolitiqueConfidentialite } from './pages/PolitiqueConfidentialite';
 import { NotFound } from './pages/NotFound';
 import { PrestationDetail } from './pages/(one)/prestation';
+import { ProduitDetail } from './pages/(one)/produit';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: 'prestation/:documentId',
         Component: PrestationDetail,
+      },
+      {
+        path: 'produit/:documentId',
+        Component: ProduitDetail,
       },
       {
         path: 'tarifs',

@@ -10,6 +10,7 @@ export type Produit = {
   details?: BlocksContent | null;
   price: number | null;
   unite: string;
+  saison: string;
   category?: Category;
 };
 
@@ -22,18 +23,48 @@ export function formatProduitPrice(price: number | null, unite: string): string 
     return "Sur devis";
   }
 
-  const amount = Number.isInteger(price) ? `${price}` : `${price}`;
+  const amount = formatProduitAmount(price);
   const unit = (unite ?? "").trim();
 
   if (!unit) {
-    return `${amount}€`;
+    return amount;
   }
 
   if (unit.startsWith("/") || unit.startsWith("€")) {
-    return `${amount}€${unit.replace(/^€/, "")}`;
+    return `${amount.replace(/\s?€$/, "€")}${unit.replace(/^€/, "")}`;
   }
 
-  return `${amount}€/${unit}`;
+  return `${amount.replace(/\s?€$/, "€")}/${unit}`;
+}
+
+/** Montant seul, ex. `12,50 €` ou `Sur devis`. */
+export function formatProduitAmount(price: number | null): string {
+  if (price == null) {
+    return "Sur devis";
+  }
+
+  const formatted = new Intl.NumberFormat("fr-FR", {
+    minimumFractionDigits: Number.isInteger(price) ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(price);
+
+  return `${formatted} €`;
+}
+
+/** Libellé d’unité sous le prix (fiche détail). */
+export function formatProduitUniteLabel(unite: string): string {
+  const unit = (unite ?? "").trim().replace(/^\//, "");
+  if (!unit) return "";
+
+  const normalized = unit.toLowerCase();
+  if (normalized === "pers" || normalized === "personne" || normalized === "personnes") {
+    return "par personne";
+  }
+  if (normalized === "kg" || normalized === "kilo" || normalized === "kilos") {
+    return "au kilo";
+  }
+
+  return unit.startsWith("par ") || unit.startsWith("au ") ? unit : `par ${unit}`;
 }
 
 type ProduitApiItem = {
@@ -44,6 +75,7 @@ type ProduitApiItem = {
   details?: BlocksContent | null;
   Prix?: number | string | null;
   unite?: string;
+  saison?: string | null;
   categorie?: { id: number; Label: string };
 };
 
@@ -62,6 +94,7 @@ function mapProduit(item: ProduitApiItem): Produit {
     details: item.details,
     price: Number.isFinite(price as number) ? (price as number) : null,
     unite: item.unite ?? "",
+    saison: item.saison?.trim() ?? "",
     category: item.categorie
       ? { id: item.categorie.id, label: item.categorie.Label }
       : undefined,
@@ -71,6 +104,11 @@ function mapProduit(item: ProduitApiItem): Produit {
 export async function getProduits(): Promise<Produit[]> {
   const { data } = await fetchAPI("/api/produits?populate=*");
   return data.map(mapProduit);
+}
+
+export async function getOneProduit(documentId: string): Promise<Produit> {
+  const { data } = await fetchAPI(`/api/produits/${documentId}?populate=*`);
+  return mapProduit(data);
 }
 
 export type ProduitsByCategory = {

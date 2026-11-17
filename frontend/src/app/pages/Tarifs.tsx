@@ -7,18 +7,10 @@ import {
   getFormules,
   type Formule,
 } from '../../api/formules';
-import {
-  formatProduitPrice,
-  getProduits,
-  groupProduitsByCategory,
-  type ProduitsByCategory,
-} from '../../api/produits';
 
 export function Tarifs() {
   const [formules, setFormules] = useState<Formule[]>([]);
   const [formulesError, setFormulesError] = useState<string | null>(null);
-  const [seasonalProducts, setSeasonalProducts] = useState<ProduitsByCategory[]>([]);
-  const [produitsError, setProduitsError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadFormules() {
@@ -35,29 +27,14 @@ export function Tarifs() {
       }
     }
 
-    async function loadProduits() {
-      try {
-        setProduitsError(null);
-        const produits = await getProduits();
-        setSeasonalProducts(groupProduitsByCategory(produits));
-      } catch (error) {
-        setProduitsError(
-          error instanceof Error
-            ? error.message
-            : 'Impossible de charger les produits saisonniers.',
-        );
-      }
-    }
-
     loadFormules();
-    loadProduits();
   }, []);
 
   return (
     <div className="min-h-screen">
       <Seo
         title="Tarifs"
-        description="Formules traiteur et produits saisonniers de La Cuisine de Fred à Chartres : tarifs par personne, sur devis, pour mariages et événements en Eure-et-Loir."
+        description="Formules traiteur de La Cuisine de Fred à Chartres : tarifs par personne, sur devis, pour mariages et événements en Eure-et-Loir."
       />
       {/* Hero Section */}
       <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--burgundy)] to-[var(--dark-grey)]">
@@ -179,57 +156,6 @@ export function Tarifs() {
             <strong>Important :</strong> Tous nos plats sont préparés avec des produits frais et de saison.
             Les tarifs peuvent varier en fonction des ingrédients sélectionnés.
           </p>
-        </div>
-      </section>
-
-      {/* Seasonal Products */}
-      <section className="bg-muted py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
-            <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-              Produits Saisonniers
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Disponibles en fonction de la saison et sur commande
-            </p>
-          </div>
-
-          {produitsError && (
-            <div className="text-center py-10 mb-8">
-              <p className="text-destructive text-lg">{produitsError}</p>
-            </div>
-          )}
-
-          {!produitsError && seasonalProducts.length === 0 && (
-            <div className="text-center py-10 mb-8">
-              <p className="text-muted-foreground text-lg">
-                Aucun produit saisonnier publié pour le moment.
-              </p>
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {seasonalProducts.map((group) => (
-              <div key={group.category} className="bg-white rounded-2xl p-8 shadow-md">
-                <h3 className="text-3xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {group.category}
-                </h3>
-                <ul className="space-y-4">
-                  {group.items.map((item) => (
-                    <li
-                      key={item.documentId}
-                      className="flex justify-between items-center pb-4 border-b border-border last:border-0"
-                    >
-                      <span className="text-foreground text-lg">{item.title}</span>
-                      <span className="text-[var(--burgundy)] text-xl" style={{ fontFamily: 'var(--font-heading)' }}>
-                        {formatProduitPrice(item.price, item.unite)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
