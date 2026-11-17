@@ -81,8 +81,8 @@ export function Tarifs() {
             return (
               <div
                 key={formule.documentId}
-                className={`rounded-2xl overflow-hidden border-2 border-transparent transition-colors duration-300 ${highlighted
-                  ? 'bg-[var(--burgundy)] text-white shadow-xl scale-105 md:scale-105 hover:border-white/40'
+                className={`rounded-2xl overflow-hidden border-2 transition-colors duration-300 ${highlighted
+                  ? 'bg-[var(--burgundy)] border-transparent text-white shadow-xl scale-105 md:scale-105 hover:border-white/40'
                   : 'bg-white shadow-md hover:border-[var(--burgundy)] hover:shadow-lg'
                   }`}
               >
@@ -147,11 +147,12 @@ export function Tarifs() {
           })}
         </div>
 
-        {/* Important Note */}
-        <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-lg max-w-4xl mx-auto">
-          <p className="text-amber-900 leading-relaxed text-lg">
-            <strong>Important :</strong> Tous nos plats sont préparés avec des produits frais et de saison.
-            Les tarifs peuvent varier en fonction des ingrédients sélectionnés.
+        {/* Info Note */}
+        <div className="bg-muted border-l-4 border-[var(--burgundy)] p-6 rounded-lg max-w-4xl mx-auto">
+          <p className="text-muted-foreground leading-relaxed text-lg">
+            <strong className="text-foreground">À noter :</strong> Tous nos plats sont préparés avec des
+            produits frais et de saison. Les tarifs peuvent varier en fonction des ingrédients
+            sélectionnés.
           </p>
         </div>
       </section>
