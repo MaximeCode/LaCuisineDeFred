@@ -182,8 +182,8 @@ frontend/Exemple page légales/*
 frontend/Exemple SEO/*
 frontend/Exemple Prestations Figma/*
 
-# CDC
-CDC.md
+# Toutes les docs en .md à la racine du projet
+/*.md
 
 # Docs locales pour sous-agents (ne pas committer)
 docs/agent-tasks/
