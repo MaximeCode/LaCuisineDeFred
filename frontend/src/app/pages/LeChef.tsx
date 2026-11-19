@@ -62,7 +62,7 @@ export function LeChef() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-16">
           <div className="lg:sticky lg:top-[90px]">
             <div className="rounded-2xl overflow-hidden shadow-xl bg-muted aspect-[4/5] flex items-center justify-center">
               {content.image ? (

@@ -3,7 +3,7 @@ import { Seo } from '../components/Seo';
 
 export function NotFound() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-6 py-24">
+    <div className="min-h-[70vh] flex items-center justify-center px-6 py-16">
       <Seo
         title="Page introuvable"
         description="La page demandée est introuvable sur le site de La Cuisine de Fred, traiteur à Chartres."

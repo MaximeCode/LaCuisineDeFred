@@ -144,7 +144,7 @@ export function Home() {
       </section>
 
       {/* Key Values */}
-      <section className="bg-muted py-24">
+      <section className="bg-muted py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
@@ -177,7 +177,7 @@ export function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-[var(--dark-grey)] text-white py-24">
+      <section className="bg-[var(--dark-grey)] text-white py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Prêt à organiser votre événement ?

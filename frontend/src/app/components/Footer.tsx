@@ -18,16 +18,24 @@ export function Footer() {
   return (
     <footer className="bg-[var(--dark-grey)] text-white">
       <hr className="bg-gray-600 h-1" />
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
           {/* Brand */}
-          <div>
+          <div className="sm:col-span-2 md:col-span-1">
             <p className="text-2xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
               La Cuisine de Fred
             </p>
             <p className="text-gray-300 leading-relaxed">
               Chef à domicile et service traiteur pour vos événements privés et professionnels.
             </p>
+            <div className="mt-6 ml-10">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center bg-[var(--burgundy)] text-white px-7 py-3 rounded-full hover:bg-[#6b0f2a] transition-colors"
+              >
+                Me contacter
+              </Link>
+            </div>
           </div>
 
           {/* Contact */}
@@ -68,10 +76,10 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+            <p className="text-xl" style={{ fontFamily: 'var(--font-heading)' }}>
               Navigation
             </p>
-            <nav className="flex flex-col gap-3 mb-6" aria-label="Navigation pied de page">
+            <nav className="flex flex-col gap-3" aria-label="Navigation pied de page">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.to}
@@ -82,17 +90,11 @@ export function Footer() {
                 </Link>
               ))}
             </nav>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center bg-[var(--burgundy)] text-white px-7 py-3 rounded-full hover:bg-[#6b0f2a] transition-colors"
-            >
-              Me contacter
-            </Link>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-600 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div className="border-t border-gray-600 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <div className="flex flex-col items-center md:items-start gap-1">
             <p>© 2026 La Cuisine de Fred. Tous droits réservés.</p>
             <p>
