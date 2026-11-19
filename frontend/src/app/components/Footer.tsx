@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-xl" style={{ fontFamily: 'var(--font-heading)' }}>
+            <p className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
               Navigation
             </p>
             <nav className="flex flex-col gap-3" aria-label="Navigation pied de page">
