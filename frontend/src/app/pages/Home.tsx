@@ -90,7 +90,7 @@ export function Home() {
       </section>
 
       {/* Latest Prestations */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="mb-16">
           <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Dernières Prestations
@@ -195,7 +195,7 @@ export function Home() {
       </section>
 
       {/* Service Area */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
           <div>
             <h2 className="text-5xl md:text-6xl mb-16 text-center" style={{ fontFamily: 'var(--font-heading)' }}>

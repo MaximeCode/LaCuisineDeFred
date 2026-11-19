@@ -49,7 +49,7 @@ export function MentionsLegales() {
         </div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 py-20">
+      <section className="max-w-3xl mx-auto px-6 py-16">
         <p className="text-muted-foreground text-sm mb-10">
           Dernière mise à jour : <Value value={updatedLabel} fallback="—" />
         </p>

@@ -105,7 +105,7 @@ export function PrestationDetail() {
       />
       {/* Hero Section */}
       <section className="relative h-[35vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-12 pt-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-10">
           <Link
             to="/prestations"
             className="inline-block text-white/90 mb-6 text-sm tracking-wide relative after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-white/90 after:transition-all after:duration-200 hover:after:w-full"
@@ -126,7 +126,7 @@ export function PrestationDetail() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16 pb-20">
+      <section className="max-w-7xl mx-auto px-6 py-16">
         {prestation.image && (
           <div className="rounded-2xl overflow-hidden shadow-2xl mb-12 -mt-20 relative z-20 ring-1 ring-black/5">
             <ImageWithFallback

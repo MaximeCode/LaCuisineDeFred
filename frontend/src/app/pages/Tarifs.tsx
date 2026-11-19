@@ -49,7 +49,7 @@ export function Tarifs() {
       </section>
 
       {/* Formulas Section */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="mb-16">
           <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Nos Formules Traiteur
@@ -73,7 +73,7 @@ export function Tarifs() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {formules.map((formule) => {
             const highlighted = formule.populaire;
             const { label: priceLabel, detail: priceDetail } = formatFormulePrice(formule.prix);
@@ -158,19 +158,21 @@ export function Tarifs() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-4xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-          Besoin d'un Devis Personnalisé ?
-        </h2>
-        <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
-          Contactez-moi pour discuter de vos besoins spécifiques et recevoir une proposition sur mesure.
-        </p>
-        <Link
-          to="/contact"
-          className="inline-block bg-[var(--burgundy)] text-white px-10 py-5 rounded-full hover:bg-[#6b0f2a] transition-colors text-xl"
-        >
-          Demander un devis gratuit
-        </Link>
+      <section className="bg-muted py-16">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+            Besoin d'un Devis Personnalisé ?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
+            Contactez-moi pour discuter de vos besoins spécifiques et recevoir une proposition sur mesure.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-block bg-[var(--burgundy)] text-white px-10 py-5 rounded-full hover:bg-[#6b0f2a] transition-colors text-xl"
+          >
+            Demander un devis gratuit
+          </Link>
+        </div>
       </section>
     </div>
   );

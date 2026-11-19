@@ -35,7 +35,7 @@ export function ImageGallery({
   return (
     <>
       <section
-        className={`mt-16 md:mt-20 ${className}`.trim()}
+        className={`mt-12 md:mt-16 ${className}`.trim()}
         aria-labelledby="gallery-title"
       >
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">

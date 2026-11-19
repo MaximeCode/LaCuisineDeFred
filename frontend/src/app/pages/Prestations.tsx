@@ -169,11 +169,10 @@ export function Prestations() {
               role="tab"
               aria-selected={activeView === 'prestations'}
               onClick={() => changeView('prestations')}
-              className={`px-5 py-2 rounded-full transition-all text-lg ${
-                activeView === 'prestations'
-                  ? 'bg-white text-[var(--burgundy)] shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              className={`px-5 py-2 rounded-full transition-all text-lg ${activeView === 'prestations'
+                ? 'bg-white text-[var(--burgundy)] shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+                }`}
             >
               Prestations
             </button>
@@ -182,11 +181,10 @@ export function Prestations() {
               role="tab"
               aria-selected={activeView === 'produits'}
               onClick={() => changeView('produits')}
-              className={`px-5 py-2 rounded-full transition-all text-lg ${
-                activeView === 'produits'
-                  ? 'bg-white text-[var(--burgundy)] shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              className={`px-5 py-2 rounded-full transition-all text-lg ${activeView === 'produits'
+                ? 'bg-white text-[var(--burgundy)] shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+                }`}
             >
               Produits saisonniers
             </button>
@@ -198,11 +196,10 @@ export function Prestations() {
                 type="button"
                 key={String(category.id)}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-4 py-1.5 rounded-full transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-[var(--burgundy)] text-white'
-                    : 'text-muted-foreground hover:bg-[var(--burgundy)]/10 hover:text-foreground'
-                }`}
+                className={`px-4 py-1.5 rounded-full transition-all ${activeCategory === category.id
+                  ? 'bg-[var(--burgundy)] text-white'
+                  : 'text-muted-foreground hover:bg-[var(--burgundy)]/10 hover:text-foreground'
+                  }`}
               >
                 {category.label}
               </button>
@@ -277,7 +274,7 @@ export function Prestations() {
             </div>
 
             {!loadError && filteredPrestations.length === 0 && (
-              <div className="text-center py-20">
+              <div className="text-center py-16">
                 <p className="text-muted-foreground text-xl">
                   Aucune prestation disponible dans cette catégorie pour le moment.
                 </p>
@@ -335,7 +332,7 @@ export function Prestations() {
             </div>
 
             {!produitsError && filteredProduits.length === 0 && (
-              <div className="text-center py-20">
+              <div className="text-center py-16">
                 <p className="text-muted-foreground text-xl">
                   Aucun produit disponible dans cette catégorie pour le moment.
                 </p>
@@ -345,7 +342,7 @@ export function Prestations() {
         )}
       </section>
 
-      <section className="bg-muted py-20">
+      <section className="bg-muted py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Un Projet en Tête ?

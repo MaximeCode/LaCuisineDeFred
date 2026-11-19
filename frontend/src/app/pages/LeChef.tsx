@@ -55,7 +55,7 @@ export function LeChef() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16">
         {loadError && (
           <div className="text-center py-6 mb-10">
             <p className="text-destructive text-lg">{loadError}</p>
@@ -124,7 +124,7 @@ export function LeChef() {
           )}
         </div>
 
-        <div className="mt-20 text-center">
+        <div className="mt-16 text-center">
           <Link
             to="/contact"
             className="inline-block bg-[var(--burgundy)] text-white px-10 py-5 rounded-full hover:bg-[#6b0f2a] transition-colors text-xl"
