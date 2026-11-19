@@ -1,12 +1,23 @@
-import { API_URL, fetchAPI } from "./Client";
+import { fetchAPI } from "./Client";
 import type { BlocksContent } from "./blocks";
 import type { Category } from "./categories";
+import {
+  mapGalleryFromMedia,
+  type GalleryImage,
+} from "./gallery";
+import {
+  resolveMediaUrl,
+  type MediaApiItem,
+} from "./media";
+
+export type { GalleryImage };
 
 export type Produit = {
   id: number;
   documentId: string;
   title: string;
   image: string;
+  gallery: GalleryImage[];
   details?: BlocksContent | null;
   price: number | null;
   unite: string;
@@ -71,7 +82,8 @@ type ProduitApiItem = {
   id: number;
   documentId: string;
   Titre: string;
-  image?: { url: string };
+  image?: MediaApiItem;
+  galerie?: MediaApiItem[] | null;
   details?: BlocksContent | null;
   Prix?: number | string | null;
   unite?: string;
@@ -90,7 +102,8 @@ function mapProduit(item: ProduitApiItem): Produit {
     id: item.id,
     documentId: item.documentId,
     title: item.Titre,
-    image: `${API_URL}${item.image?.url ?? ""}`,
+    image: resolveMediaUrl(item.image),
+    gallery: mapGalleryFromMedia(item.galerie, item.Titre),
     details: item.details,
     price: Number.isFinite(price as number) ? (price as number) : null,
     unite: item.unite ?? "",

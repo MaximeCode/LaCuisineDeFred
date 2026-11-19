@@ -8,9 +8,16 @@ import {
   type Produit,
 } from '../../../api/produits';
 import { BlocksRenderer } from '../../components/BlocksRenderer';
+import { ImageGallery } from '../../components/ImageGallery';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
 import { Seo } from '../../components/Seo';
 import React from 'react';
+
+/** Libellés galerie Produit — isolés pour extension sans toucher le mapping. */
+const PRODUIT_GALLERY_COPY = {
+  eyebrow: "Dans l’assiette",
+  title: "Le produit en images",
+} as const;
 
 const pageBackgroundStyle: React.CSSProperties = {
   backgroundColor: '#faf8f9',
@@ -179,6 +186,12 @@ export function ProduitDetail() {
             </div>
           </div>
         </div>
+
+        <ImageGallery
+          images={produit.gallery}
+          eyebrow={PRODUIT_GALLERY_COPY.eyebrow}
+          title={PRODUIT_GALLERY_COPY.title}
+        />
       </section>
     </ProduitPageShell>
   );

@@ -188,6 +188,5 @@ frontend/Exemple Prestations Figma/*
 # Docs locales pour sous-agents (ne pas committer)
 docs/agent-tasks/
 
-# Scripts de deployment
-PP_DEPLOY_LCDF.bat
-PROD_DEPLOY_LCDF.bat
+# Scripts (déploiement PROD/PP, développement)
+*.bat

@@ -23,6 +23,14 @@
         "images"
       ]
     },
+    "galerie": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
     "details": {
       "type": "blocks"
     },

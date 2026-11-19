@@ -553,8 +553,8 @@ export interface ApiPrestationPrestation extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> & Schema.Attribute.Private;
     details: Schema.Attribute.Blocks;
-    image: Schema.Attribute.Media<"images" | "files" | "videos" | "audios"> &
-      Schema.Attribute.Required;
+    galerie: Schema.Attribute.Media<"images", true>;
+    image: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::prestation.prestation"> &
       Schema.Attribute.Private;
@@ -580,6 +580,7 @@ export interface ApiProduitProduit extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> & Schema.Attribute.Private;
     details: Schema.Attribute.Blocks;
+    galerie: Schema.Attribute.Media<"images", true>;
     image: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::produit.produit"> &

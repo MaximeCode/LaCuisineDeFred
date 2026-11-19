@@ -1,12 +1,23 @@
-import { API_URL, fetchAPI } from "./Client";
+import { fetchAPI } from "./Client";
 import type { BlocksContent } from "./blocks";
 import type { Category } from "./categories";
+import {
+  mapGalleryFromMedia,
+  type GalleryImage,
+} from "./gallery";
+import {
+  resolveMediaUrl,
+  type MediaApiItem,
+} from "./media";
+
+export type { GalleryImage };
 
 export type Prestation = {
   id: number;
   documentId: string;
   title: string;
   image: string;
+  gallery: GalleryImage[];
   details?: BlocksContent | null;
   category?: Category;
 };
@@ -15,7 +26,8 @@ type PrestationApiItem = {
   id: number;
   documentId: string;
   Titre: string;
-  image?: { url: string };
+  image?: MediaApiItem;
+  galerie?: MediaApiItem[] | null;
   details?: BlocksContent | null;
   categorie?: { id: number; Label: string };
 };
@@ -25,7 +37,8 @@ function mapPrestation(item: PrestationApiItem): Prestation {
     id: item.id,
     documentId: item.documentId,
     title: item.Titre,
-    image: `${API_URL}${item.image?.url ?? ""}`,
+    image: resolveMediaUrl(item.image),
+    gallery: mapGalleryFromMedia(item.galerie, item.Titre),
     details: item.details,
     category: item.categorie
       ? { id: item.categorie.id, label: item.categorie.Label }
@@ -49,14 +62,5 @@ export async function getOnePrestation(
   documentId: string,
 ): Promise<Prestation> {
   const { data } = await fetchAPI(`/api/prestations/${documentId}?populate=*`);
-  return {
-    id: data.id,
-    documentId: data.documentId,
-    title: data.Titre,
-    image: `${API_URL}${data.image?.url ?? ""}`,
-    details: data.details,
-    category: data.categorie
-      ? { id: data.categorie.id, label: data.categorie.Label }
-      : undefined,
-  };
+  return mapPrestation(data);
 }

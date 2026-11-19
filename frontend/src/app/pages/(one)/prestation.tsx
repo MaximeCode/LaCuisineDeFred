@@ -2,9 +2,16 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { getOnePrestation, type Prestation } from "../../../api/prestations";
 import { BlocksRenderer } from "../../components/BlocksRenderer";
+import { ImageGallery } from "../../components/ImageGallery";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import { Seo } from "../../components/Seo";
 import React from "react";
+
+/** Libellés galerie Prestation — isolés pour extension sans toucher le mapping. */
+const PRESTATION_GALLERY_COPY = {
+  eyebrow: "Souvenirs de la journée",
+  title: "L’événement en images",
+} as const;
 
 const pageBackgroundStyle: React.CSSProperties = {
   backgroundColor: "#faf8f9",
@@ -139,6 +146,12 @@ export function PrestationDetail() {
             </p>
           )}
         </div>
+
+        <ImageGallery
+          images={prestation.gallery}
+          eyebrow={PRESTATION_GALLERY_COPY.eyebrow}
+          title={PRESTATION_GALLERY_COPY.title}
+        />
       </section>
 
       <section className="py-16 border-t border-[var(--burgundy)]/10">
