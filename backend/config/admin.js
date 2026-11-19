@@ -3,8 +3,8 @@ module.exports = ({ env }) => ({
     secret: env('ADMIN_JWT_SECRET'),
 
     sessions: {
-      // Durée du jeton d'accès : 5 heures (C CELUI LA QUI FAUT CHANGER !!!)
-      accessTokenLifespan: 5 * 60 * 60,
+      // Durée du jeton d'accès : 8 heures (C CELUI LA QUI FAUT CHANGER !!!)
+      accessTokenLifespan: 72 * 60 * 60,
 
       // Durée maximale du refresh token : 30 jours
       maxRefreshTokenLifespan: 30 * 24 * 60 * 60,
@@ -33,5 +33,21 @@ module.exports = ({ env }) => ({
   flags: {
     nps: env.bool('FLAG_NPS', true),
     promoteEE: env.bool('FLAG_PROMOTE_EE', true),
+  },
+  url: "/fred-admin",
+  cookie: {
+    path: "/fred-admin",
+    sameSite: 'lax',
+  },
+  rateLimit: {
+    enabled: true,
+    // Fenêtre de quinze minutes.
+    interval: { min: 15 },
+    // Maximum de cinq tentatives pendant cette fenêtre.
+    max: 5,
+    // Les réponses commencent à être ralenties après la première tentative.
+    delayAfter: 1,
+    // Temps d'attente de trois secondes.
+    timeWait: 3000,
   },
 });
