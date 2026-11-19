@@ -1,8 +1,14 @@
 import { Link } from 'react-router';
-import { Phone, Mail, MapPin, Star } from 'lucide-react';
-import React from 'react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { useDonneesLegales } from '../context/DonneesLegalesContext';
 import { formatAdresseComplete, telHref } from '../../api/donneesLegales';
+
+const NAV_LINKS = [
+  { to: '/prestations', label: 'Prestations' },
+  { to: '/prestations?view=produits', label: 'Produits' },
+  { to: '/tarifs', label: 'Tarifs' },
+  { to: '/le-chef', label: 'Le Chef' },
+] as const;
 
 export function Footer() {
   const legales = useDonneesLegales();
@@ -45,50 +51,70 @@ export function Footer() {
                     {email}
                   </a>
                 ) : (
-                  <a href="mailto:contact@lacuisinedefred-traiteur.fr" className="hover:text-white transition-colors">
+                  <a
+                    href="mailto:contact@lacuisinedefred-traiteur.fr"
+                    className="hover:text-white transition-colors"
+                  >
                     contact@lacuisinedefred-traiteur.fr
                   </a>
                 )}
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <MapPin size={18} className="text-[var(--burgundy)]" />
-                <span>
-                  {adresse || 'Chartres et Eure-et-Loir (28)'}
-                </span>
+                <span>{adresse || 'Chartres et Eure-et-Loir (28)'}</span>
               </div>
             </div>
           </div>
 
-          {/* Reviews */}
+          {/* Navigation */}
           <div>
             <p className="text-xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-              Avis clients
+              Navigation
             </p>
-            <div className="flex items-center gap-2 mb-3">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} size={18} fill="var(--burgundy)" className="text-[var(--burgundy)]" />
+            <nav className="flex flex-col gap-3 mb-6" aria-label="Navigation pied de page">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="text-gray-300 hover:text-white transition-colors w-fit"
+                >
+                  {link.label}
+                </Link>
               ))}
-            </div>
-            <p className="text-gray-300 mb-3">
-              4.9/5 basé sur les avis Google
-            </p>
-            <a
-              href="#"
-              className="text-[var(--burgundy)] hover:underline"
+            </nav>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center bg-[var(--burgundy)] text-white px-7 py-3 rounded-full hover:bg-[#6b0f2a] transition-colors"
             >
-              Voir tous les avis
-            </a>
+              Me contacter
+            </Link>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-600 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-          <p>© 2026 La Cuisine de Fred. Tous droits réservés.</p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p>© 2026 La Cuisine de Fred. Tous droits réservés.</p>
+            <p>
+              Site réalisé par{' '}
+              <a
+                href="https://my-portfolio-maxime-baude.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-white transition-colors"
+              >
+                Maxime BAUDE
+              </a>
+            </p>
+          </div>
           <div className="flex gap-6">
             <Link to="/mentions-legales" className="hover:text-white transition-colors">
               Mentions légales
             </Link>
-            <Link to="/politique-de-confidentialite" className="hover:text-white transition-colors">
+            <Link
+              to="/politique-de-confidentialite"
+              className="hover:text-white transition-colors"
+            >
               Politique de confidentialité
             </Link>
           </div>

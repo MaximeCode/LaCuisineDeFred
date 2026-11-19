@@ -106,7 +106,35 @@ export function MentionsLegales() {
           </p>
         </LegalSection>
 
-        <LegalSection title="3. Hébergement">
+        <LegalSection title="3. Conception et réalisation">
+          <p>Le site a été conçu et développé par&nbsp;:</p>
+          <ul className="list-none space-y-1 border-l-2 border-[var(--burgundy)] pl-4 my-4">
+            <li>
+              <strong>Nom :</strong>{' '}
+              <a
+                href="https://my-portfolio-maxime-baude.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--burgundy)] hover:underline"
+              >
+                Maxime BAUDE
+              </a>
+            </li>
+            <li>
+              <strong>Portfolio :</strong>{' '}
+              <a
+                href="https://my-portfolio-maxime-baude.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--burgundy)] hover:underline break-all"
+              >
+                https://my-portfolio-maxime-baude.vercel.app/
+              </a>
+            </li>
+          </ul>
+        </LegalSection>
+
+        <LegalSection title="4. Hébergement">
           <p>Le site est hébergé par&nbsp;:</p>
           <ul className="list-none space-y-1 border-l-2 border-[var(--burgundy)] pl-4 my-4">
             <li>
@@ -127,7 +155,7 @@ export function MentionsLegales() {
           </ul>
         </LegalSection>
 
-        <LegalSection title="4. Propriété intellectuelle">
+        <LegalSection title="5. Propriété intellectuelle">
           <p>
             L&apos;ensemble des contenus présents sur ce site (textes, photographies, logos,
             éléments graphiques, structure, charte visuelle), sauf mention contraire, est la
@@ -147,7 +175,7 @@ export function MentionsLegales() {
           </p>
         </LegalSection>
 
-        <LegalSection title="5. Données personnelles">
+        <LegalSection title="6. Données personnelles">
           <p>
             Les traitements de données personnelles mis en œuvre via ce site sont décrits dans
             notre{' '}
@@ -161,7 +189,7 @@ export function MentionsLegales() {
           </p>
         </LegalSection>
 
-        <LegalSection title="6. Limitation de responsabilité">
+        <LegalSection title="7. Limitation de responsabilité">
           <p>
             L&apos;éditeur s&apos;efforce d&apos;assurer l&apos;exactitude et la mise à jour des
             informations diffusées sur ce site (présentation des prestations, formules, produits
@@ -176,7 +204,7 @@ export function MentionsLegales() {
           </p>
         </LegalSection>
 
-        <LegalSection title="7. Droit applicable">
+        <LegalSection title="8. Droit applicable">
           <p>
             Le présent site est soumis au droit français. En cas de litige, et à défaut d&apos;accord
             amiable, les tribunaux français seront seuls compétents.
