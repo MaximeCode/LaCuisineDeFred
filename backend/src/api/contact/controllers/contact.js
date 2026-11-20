@@ -15,6 +15,10 @@ module.exports = {
         });
 
         const contactTo = process.env.CONTACT_TO;
+        const contactCc = (process.env.CONTACT_CC || '')
+            .split(',')
+            .map((address) => address.trim())
+            .filter(Boolean);
         const fromAddress = process.env.RESEND_DEFAULT_EMAIL || 'onboarding@resend.dev';
         const from = `La Cuisine de Fred <${fromAddress}>`;
 
@@ -31,6 +35,7 @@ module.exports = {
         try {
             const result = await strapi.plugins['email'].services.email.send({
                 to: contactTo,
+                ...(contactCc.length > 0 ? { cc: contactCc } : {}),
                 from,
                 replyTo: email,
                 subject: `Nouvelle demande de devis — ${fullName}`,
