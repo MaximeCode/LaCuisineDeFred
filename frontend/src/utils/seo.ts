@@ -1,4 +1,4 @@
-export const SITE_NAME = 'La Cuisine de Fred';
+export const SITE_NAME = "La Cuisine de Fred, Chef à domicile et Traiteur";
 
 export const SITE_URL = (
   import.meta.env.VITE_SITE_URL as string | undefined
