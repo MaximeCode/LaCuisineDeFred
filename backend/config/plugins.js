@@ -2,16 +2,13 @@
 module.exports = ({ env }) => ({
   email: {
     config: {
-      provider: 'nodemailer',
+      provider: 'strapi-provider-email-resend-strapi',
       providerOptions: {
-        host: env('SMTP_HOST', 'localhost'),
-        port: env('SMTP_PORT', 1025),
-        ignoreTLS: true,
-        secure: false,
+        apiKey: env('RESEND_API_KEY'),
       },
       settings: {
-        defaultFrom: env('SMTP_FROM', 'no-reply@lacuisinedefred-traiteur.fr'),
-        defaultReplyTo: env('SMTP_FROM', 'no-reply@lacuisinedefred-traiteur.fr'),
+        defaultFrom: env('RESEND_DEFAULT_EMAIL', 'onboarding@resend.dev'),
+        defaultReplyTo: env('RESEND_USER_EMAIL'),
       },
     },
   },
