@@ -38,18 +38,18 @@ export function MentionsLegales() {
         title="Mentions légales"
         description="Mentions légales de La Cuisine de Fred, traiteur à Chartres : éditeur, hébergeur, propriété intellectuelle et responsabilités du site."
       />
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
+      <section className="relative h-[30vh] md:h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-6xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
             Mentions légales
           </h1>
-          <p className="text-2xl text-gray-200">
+          <p className="text-xl md:text-2xl text-gray-200">
             Informations légales relatives au site La Cuisine de Fred
           </p>
         </div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 py-16">
+      <section className="max-w-3xl mx-auto px-6 py-8 md:py-16">
         <p className="text-muted-foreground text-sm mb-10">
           Dernière mise à jour : <Value value={updatedLabel} fallback="—" />
         </p>

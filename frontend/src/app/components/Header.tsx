@@ -24,12 +24,25 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6 py-5">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex flex-col">
-            <span className="text-2xl tracking-wide" style={{ fontFamily: 'var(--font-heading)' }}>
-              La Cuisine de Fred
-            </span>
-            <span className="text-xs text-muted-foreground tracking-widest uppercase">
-              Traiteur à Chartres
+          <Link to="/" className="flex items-center gap-3 min-w-0">
+            <img
+              src="/favicon_lcdf_carre.webp"
+              alt=""
+              width={48}
+              height={48}
+              className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-sm"
+              decoding="async"
+            />
+            <span className="flex flex-col min-w-0">
+              <span
+                className="text-xl sm:text-2xl tracking-wide leading-tight"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                La Cuisine de Fred
+              </span>
+              <span className="text-xs text-muted-foreground tracking-widest uppercase">
+                Traiteur à Chartres
+              </span>
             </span>
           </Link>
 

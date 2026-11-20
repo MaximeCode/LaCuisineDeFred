@@ -90,9 +90,9 @@ export function Home() {
       </section>
 
       {/* Latest Prestations */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="mb-16">
-          <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
+        <div className="mb-8 md:mb-16">
+          <h2 className="text-4xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Dernières Prestations
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl">
@@ -144,10 +144,10 @@ export function Home() {
       </section>
 
       {/* Key Values */}
-      <section className="bg-muted py-16">
+      <section className="bg-muted py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
-            <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+          <div className="mb-8 md:mb-16">
+            <h2 className="text-4xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
               Mes Engagements
             </h2>
           </div>
@@ -177,9 +177,9 @@ export function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-[var(--dark-grey)] text-white py-16">
+      <section className="bg-[var(--dark-grey)] text-white py-8 md:py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="text-4xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Prêt à organiser votre événement ?
           </h2>
           <p className="text-2xl text-gray-300 mb-10 leading-relaxed font-light">
@@ -195,10 +195,10 @@ export function Home() {
       </section>
 
       {/* Service Area */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
         <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
           <div>
-            <h2 className="text-5xl md:text-6xl mb-16 text-center" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2 className="text-4xl md:text-6xl mb-8 md:mb-16 text-center" style={{ fontFamily: 'var(--font-heading)' }}>
               Traiteur à Chartres et en Eure-et-Loir
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed text-center md:text-left md:flex-1">

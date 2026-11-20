@@ -126,7 +126,7 @@ export function PrestationDetail() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
         {prestation.image && (
           <div className="rounded-2xl overflow-hidden shadow-2xl mb-12 -mt-20 relative z-20 ring-1 ring-black/5">
             <ImageWithFallback
@@ -154,7 +154,7 @@ export function PrestationDetail() {
         />
       </section>
 
-      <section className="py-16 border-t border-[var(--burgundy)]/10">
+      <section className="py-8 md:py-16 border-t border-[var(--burgundy)]/10">
         <div
           className="max-w-7xl mx-auto px-6 py-12 rounded-2xl text-center"
           style={{

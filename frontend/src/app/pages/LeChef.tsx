@@ -46,23 +46,23 @@ export function LeChef() {
         image={content.image ?? undefined}
       />
       {/* Hero Section */}
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
+      <section className="relative h-[30vh] md:h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-6xl md:text-7xl" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h1 className="text-5xl md:text-7xl" style={{ fontFamily: 'var(--font-heading)' }}>
             Le Chef
           </h1>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
         {loadError && (
           <div className="text-center py-6 mb-10">
             <p className="text-destructive text-lg">{loadError}</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start mb-8 md:mb-16">
           <div className="lg:sticky lg:top-[90px]">
             <div className="rounded-2xl overflow-hidden shadow-xl bg-muted aspect-[4/5] flex items-center justify-center">
               {content.image ? (
@@ -80,7 +80,7 @@ export function LeChef() {
           </div>
 
           <div>
-            <h2 className="text-5xl md:text-6xl mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2 className="text-4xl md:text-6xl mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
               {hasTitle ? content.titre : 'Contenu à venir'}
             </h2>
             {hasDescription ? (
@@ -94,8 +94,8 @@ export function LeChef() {
         </div>
 
         {/* Philosophy Section */}
-        <div className="bg-muted rounded-2xl p-12 md:p-16">
-          <h2 className="text-5xl md:text-6xl mb-12" style={{ fontFamily: 'var(--font-heading)' }}>
+        <div className="bg-muted rounded-2xl p-6 lg:p-16">
+          <h2 className="text-4xl md:text-6xl mb-12" style={{ fontFamily: 'var(--font-heading)' }}>
             Ma Philosophie
           </h2>
 
@@ -104,17 +104,19 @@ export function LeChef() {
               Les points de philosophie seront ajoutés prochainement.
             </p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-12">
               {content.philosophies.map((item, index) => (
                 <div key={item.id ?? `${item.titre}-${index}`}>
-                  <div className="w-16 h-16 bg-[var(--burgundy)] rounded-full flex items-center justify-center mb-6">
-                    <span className="text-3xl text-white" style={{ fontFamily: 'var(--font-heading)' }}>
-                      {index + 1}
-                    </span>
+                  <div className="flex items-center gap-6 md:gap-4 lg:gap-8 mb-4">
+                    <div className="w-16 h-16 shrink-0 bg-[var(--burgundy)] rounded-full flex items-center justify-center">
+                      <span className="text-2xl md:text-3xl text-white" style={{ fontFamily: 'var(--font-heading)' }}>
+                        {index + 1}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl" style={{ fontFamily: 'var(--font-heading)' }}>
+                      {item.titre}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-                    {item.titre}
-                  </h3>
                   <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
                     {item.description || ''}
                   </p>
@@ -124,7 +126,7 @@ export function LeChef() {
           )}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-8 md:mt-16 text-center">
           <Link
             to="/contact"
             className="inline-block bg-[var(--burgundy)] text-white px-10 py-5 rounded-full hover:bg-[#6b0f2a] transition-colors text-xl"

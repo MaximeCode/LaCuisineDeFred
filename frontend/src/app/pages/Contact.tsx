@@ -69,22 +69,22 @@ export function Contact() {
         description="Contactez La Cuisine de Fred, traiteur et chef à domicile à Chartres : demandez un devis pour votre mariage, anniversaire ou repas d'entreprise en Eure-et-Loir."
       />
       {/* Hero Section */}
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
+      <section className="relative h-[30vh] md:h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-6xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
             Contact
           </h1>
-          <p className="text-2xl text-gray-200">
+          <p className="text-xl md:text-2xl text-gray-200">
             Parlons de votre projet
           </p>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
           {/* Contact Form */}
           <div>
-            <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2 className="text-4xl md:text-5xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
               Demander un Devis
             </h2>
             <p className="text-muted-foreground mb-8 leading-relaxed text-lg">

@@ -10,6 +10,9 @@ type GalleryLightboxProps = {
   onNext: () => void;
 };
 
+const navButtonClassName =
+  "w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer";
+
 export function GalleryLightbox({
   images,
   selectedIndex,
@@ -19,6 +22,8 @@ export function GalleryLightbox({
 }: GalleryLightboxProps) {
   const selectedImage = images[selectedIndex];
   if (!selectedImage) return null;
+
+  const hasMultiple = images.length > 1;
 
   return (
     <div
@@ -31,13 +36,13 @@ export function GalleryLightbox({
       <button
         type="button"
         onClick={onClose}
-        className="absolute right-5 top-5 md:right-8 md:top-8 z-10 w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer"
+        className={`absolute right-5 top-5 md:right-8 md:top-8 z-10 ${navButtonClassName}`}
         aria-label="Fermer la galerie"
       >
         <X size={22} />
       </button>
 
-      {images.length > 1 && (
+      {hasMultiple && (
         <>
           <button
             type="button"
@@ -45,7 +50,7 @@ export function GalleryLightbox({
               event.stopPropagation();
               onPrevious();
             }}
-            className="absolute left-3 md:left-8 z-10 w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer"
+            className={`absolute left-3 md:left-8 z-10 hidden lg:flex ${navButtonClassName}`}
             aria-label="Photo précédente"
           >
             <ChevronLeft size={24} />
@@ -56,7 +61,7 @@ export function GalleryLightbox({
               event.stopPropagation();
               onNext();
             }}
-            className="absolute right-3 md:right-8 z-10 w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer"
+            className={`absolute right-3 md:right-8 z-10 hidden lg:flex ${navButtonClassName}`}
             aria-label="Photo suivante"
           >
             <ChevronRight size={24} />
@@ -71,12 +76,38 @@ export function GalleryLightbox({
         <ImageWithFallback
           src={selectedImage.src}
           alt={selectedImage.alt}
-          className="max-w-full max-h-[76vh] object-contain rounded-lg"
+          className="max-w-full max-h-[68vh] lg:max-h-[76vh] object-contain rounded-lg"
         />
-        <figcaption className="text-white/70 text-sm mt-4">
-          {String(selectedIndex + 1).padStart(2, "0")} /{" "}
-          {String(images.length).padStart(2, "0")}
-        </figcaption>
+
+        {hasMultiple ? (
+          <div className="mt-4 flex items-center justify-center gap-4 lg:gap-0">
+            <button
+              type="button"
+              onClick={onPrevious}
+              className={`lg:hidden ${navButtonClassName}`}
+              aria-label="Photo précédente"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <figcaption className="text-white/70 text-sm min-w-[4.5rem] text-center">
+              {String(selectedIndex + 1).padStart(2, "0")} /{" "}
+              {String(images.length).padStart(2, "0")}
+            </figcaption>
+            <button
+              type="button"
+              onClick={onNext}
+              className={`lg:hidden ${navButtonClassName}`}
+              aria-label="Photo suivante"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        ) : (
+          <figcaption className="text-white/70 text-sm mt-4">
+            {String(selectedIndex + 1).padStart(2, "0")} /{" "}
+            {String(images.length).padStart(2, "0")}
+          </figcaption>
+        )}
       </figure>
     </div>
   );

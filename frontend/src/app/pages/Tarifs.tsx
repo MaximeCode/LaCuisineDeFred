@@ -37,21 +37,21 @@ export function Tarifs() {
         description="Formules traiteur de La Cuisine de Fred à Chartres : tarifs par personne, sur devis, pour mariages et événements en Eure-et-Loir."
       />
       {/* Hero Section */}
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--burgundy)] to-[var(--dark-grey)]">
+      <section className="relative h-[30vh] md:h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--burgundy)] to-[var(--dark-grey)]">
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-6xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
             Tarifs
           </h1>
-          <p className="text-2xl text-gray-200">
+          <p className="text-xl md:text-2xl text-gray-200">
             Des formules adaptées à tous vos événements
           </p>
         </div>
       </section>
 
       {/* Formulas Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="mb-16">
-          <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
+        <div className="mb-8 md:mb-16">
+          <h2 className="text-4xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Nos Formules Traiteur
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl">
@@ -73,7 +73,7 @@ export function Tarifs() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 md:mb-16">
           {formules.map((formule) => {
             const highlighted = formule.populaire;
             const { label: priceLabel, detail: priceDetail } = formatFormulePrice(formule.prix);
@@ -158,9 +158,9 @@ export function Tarifs() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-muted py-16">
+      <section className="bg-muted py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="text-4xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Besoin d'un Devis Personnalisé ?
           </h2>
           <p className="text-xl text-muted-foreground mb-10 leading-relaxed">

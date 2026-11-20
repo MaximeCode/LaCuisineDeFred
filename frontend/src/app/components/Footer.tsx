@@ -18,8 +18,8 @@ export function Footer() {
   return (
     <footer className="bg-[var(--dark-grey)] text-white">
       <hr className="bg-gray-600 h-1" />
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-4 md:py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 md:col-span-1">
             <p className="text-2xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
@@ -94,7 +94,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-600 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div className="border-t border-gray-600 mt-4 pt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <div className="flex flex-col items-center md:items-start gap-1">
             <p>© 2026 La Cuisine de Fred. Tous droits réservés.</p>
             <p>
@@ -109,6 +109,14 @@ export function Footer() {
               </a>
             </p>
           </div>
+          <img
+            src="/logo_lacuisinedefred.webp"
+            alt="La Cuisine de Fred"
+            width={320}
+            height={180}
+            className="w-full max-w-[200px] h-auto rounded-md shadow-sm"
+            decoding="async"
+          />
           <div className="flex gap-6">
             <Link to="/mentions-legales" className="hover:text-white transition-colors">
               Mentions légales

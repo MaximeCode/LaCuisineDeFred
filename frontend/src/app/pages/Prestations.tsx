@@ -146,12 +146,12 @@ export function Prestations() {
         description={seoDescription}
       />
 
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
+      <section className="relative h-[30vh] md:h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--dark-grey)] to-[var(--burgundy)]">
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-6xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
             Prestations
           </h1>
-          <p className="text-2xl text-gray-200">
+          <p className="text-xl md:text-2xl text-gray-200">
             Mon portfolio de créations culinaires
           </p>
         </div>
@@ -208,7 +208,7 @@ export function Prestations() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div>
             <div className="flex items-center gap-2 text-[var(--burgundy)] mb-3">
@@ -274,7 +274,7 @@ export function Prestations() {
             </div>
 
             {!loadError && filteredPrestations.length === 0 && (
-              <div className="text-center py-16">
+              <div className="text-center py-8 md:py-16">
                 <p className="text-muted-foreground text-xl">
                   Aucune prestation disponible dans cette catégorie pour le moment.
                 </p>
@@ -332,7 +332,7 @@ export function Prestations() {
             </div>
 
             {!produitsError && filteredProduits.length === 0 && (
-              <div className="text-center py-16">
+              <div className="text-center py-8 md:py-16">
                 <p className="text-muted-foreground text-xl">
                   Aucun produit disponible dans cette catégorie pour le moment.
                 </p>
@@ -342,9 +342,9 @@ export function Prestations() {
         )}
       </section>
 
-      <section className="bg-muted py-16">
+      <section className="bg-muted py-8 md:py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="text-4xl md:text-6xl mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
             Un Projet en Tête ?
           </h2>
           <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
