@@ -8,5 +8,7 @@ module.exports = [
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
+  // Doit tourner avant d'atteindre la route publique `/` → admin.url
+  'global::hide-admin-root',
   'strapi::public',
 ];
