@@ -1,4 +1,7 @@
 // backend/config/plugins.js
+/**
+ * @param {{ env: typeof import('@strapi/utils').env }} param0
+ */
 module.exports = ({ env }) => ({
   email: {
     config: {

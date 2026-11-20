@@ -1,7 +1,11 @@
 // backend/src/api/contact/controllers/contact.js
+/// <reference types="koa-body" />
 const { buildContactEmail } = require('../templates_js/contact-email');
 
 module.exports = {
+    /**
+     * @param {import('koa').Context} ctx
+     */
     async send(ctx) {
         const { firstName, lastName, email, eventType, eventDate, guests, comment } = ctx.request.body;
         const { html, text, fullName } = buildContactEmail({
